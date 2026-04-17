@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>bizcre ステップメール 全文設計書</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+    font-size: 14px;
+    line-height: 1.8;
+    color: #1a1a1a;
+    background: #f7f6f3;
+    padding: 2rem 1rem;
+  }
+  .container { max-width: 800px; margin: 0 auto; }
+
+  /* Cover */
+  .cover {
+    background: #fff;
+    border: 1px solid #e0ddd6;
+    border-radius: 12px;
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+  }
+  .cover-label { font-size: 11px; letter-spacing: .1em; color: #888; margin-bottom: .75rem; }
+  .cover-title { font-size: 22px; font-weight: 600; color: #111; margin-bottom: .75rem; line-height: 1.4; }
+  .cover-sub { font-size: 14px; color: #555; line-height: 1.7; }
+  .cover-meta { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 1.5rem; }
+  .meta-item { font-size: 12px; color: #888; }
+  .meta-item strong { color: #444; }
+
+  /* Phase header */
+  .phase-section { margin-bottom: 2.5rem; }
+  .phase-title {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    margin-bottom: 1rem;
+    padding-bottom: .5rem;
+    border-bottom: 2px solid #e0ddd6;
+  }
+  .phase-tag {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: .05em;
+  }
+  .tag-green { background: #E1F5EE; color: #0F6E56; }
+  .tag-purple { background: #EEEDFE; color: #3C3489; }
+  .tag-amber { background: #FAEEDA; color: #633806; }
+  .phase-name { font-size: 15px; font-weight: 600; color: #333; }
+  .phase-desc { font-size: 12px; color: #888; }
+
+  /* Mail card */
+  .mail-card {
+    background: #fff;
+    border: 1px solid #e0ddd6;
+    border-radius: 10px;
+    margin-bottom: 1.25rem;
+    overflow: hidden;
+  }
+  .mail-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid #f0ede6;
+  }
+  .day-badge {
+    flex-shrink: 0;
+    width: 52px;
+    text-align: center;
+    padding: .35rem .5rem;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .day-green { background: #E1F5EE; color: #0F6E56; }
+  .day-purple { background: #EEEDFE; color: #3C3489; }
+  .day-amber { background: #FAEEDA; color: #633806; }
+  .day-coral { background: #FAECE7; color: #712B13; }
+  .mail-meta { flex: 1; }
+  .mail-subject { font-size: 15px; font-weight: 600; color: #111; margin-bottom: .25rem; }
+  .mail-intent { font-size: 12px; color: #888; }
+  .seg-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 1px 7px;
+    border-radius: 10px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .seg-s { background: #EEEDFE; color: #3C3489; }
+  .seg-v { background: #E1F5EE; color: #0F6E56; }
+
+  /* Email body simulation */
+  .mail-body {
+    padding: 1.25rem 1.5rem;
+    background: #fcfcfa;
+  }
+  .email-sim {
+    max-width: 560px;
+    margin: 0 auto;
+    background: #fff;
+    border: 1px solid #e8e5df;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .email-header-bar {
+    background: #1a1a1a;
+    padding: .6rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+  }
+  .email-logo { font-size: 13px; font-weight: 700; color: #fff; letter-spacing: .03em; }
+  .email-logo span { color: #5DCAA5; }
+  .email-content { padding: 1.5rem 1.5rem 1.25rem; }
+  .email-greeting { font-size: 13px; color: #555; margin-bottom: 1rem; }
+  .email-body-text {
+    font-size: 13px;
+    color: #333;
+    line-height: 1.85;
+    white-space: pre-line;
+  }
+  .email-highlight {
+    background: #E1F5EE;
+    border-left: 3px solid #1D9E75;
+    padding: .75rem 1rem;
+    margin: 1rem 0;
+    font-size: 13px;
+    color: #333;
+    line-height: 1.7;
+    border-radius: 0 6px 6px 0;
+  }
+  .email-cta-wrap { text-align: center; margin: 1.25rem 0 .5rem; }
+  .email-cta {
+    display: inline-block;
+    background: #1D9E75;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    padding: .65rem 1.75rem;
+    border-radius: 6px;
+    text-decoration: none;
+    letter-spacing: .03em;
+  }
+  .email-footer-text {
+    font-size: 11px;
+    color: #aaa;
+    border-top: 1px solid #f0ede6;
+    padding: .75rem 1.5rem;
+    text-align: center;
+    line-height: 1.7;
+  }
+  .email-sig {
+    font-size: 12px;
+    color: #888;
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid #f0ede6;
+    line-height: 1.7;
+  }
+
+  /* Notes */
+  .mail-notes {
+    padding: .75rem 1.25rem;
+    background: #f7f6f3;
+    border-top: 1px solid #e8e5df;
+  }
+  .note-label { font-size: 10px; font-weight: 600; letter-spacing: .08em; color: #aaa; margin-bottom: .35rem; text-transform: uppercase; }
+  .note-text { font-size: 12px; color: #777; line-height: 1.7; }
+
+  .divider { height: 1px; background: #e0ddd6; margin: 2rem 0; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Cover -->
+<div class="cover">
+  <div class="cover-label">bizcre CLOUD / トライアル登録者向け</div>
+  <div class="cover-title">ステップメール 全文設計書<br>30日間シナリオ（12通）</div>
+  <div class="cover-sub">
+    Why「中小企業を100年つづけるため」、コンセプト「経営者のガイドランナー」を軸に設計。<br>
+    売り込まず、共に走りながら、有料継続という自然な選択へ導くシナリオです。
+  </div>
+  <div class="cover-meta">
+    <div class="meta-item"><strong>通数</strong>　12通</div>
+    <div class="meta-item"><strong>期間</strong>　Day 0〜Day 30</div>
+    <div class="meta-item"><strong>主ターゲット</strong>　承継・改革層、職人脱却層</div>
+    <div class="meta-item"><strong>主CV</strong>　有料プラン（ベーシック/チーム）への転換</div>
+    <div class="meta-item"><strong>副CV</strong>　ビズクリサポーター（診断士）への接続</div>
+  </div>
+</div>
+
+
+<!-- ========== PHASE 1 ========== -->
+<div class="phase-section">
+  <div class="phase-title">
+    <span class="phase-tag tag-green">Phase 1</span>
+    <span class="phase-name">起動・理解　Day 0〜7</span>
+    <span class="phase-desc">まず動かす。なぜやるかを伝える。</span>
+  </div>
+
+  <!-- Mail 1: Day 0 -->
+  <div class="mail-card">
+    <div class="mail-header">
+      <div class="day-badge day-green">Day 0<br>即時</div>
+      <div class="mail-meta">
+        <div class="mail-subject">【bizcre】今日から、あなたの経営の地図をつくります</div>
+        <div class="mail-intent">ウェルカム ＋ メソッド全体像の提示 ＋ 最初のアクション誘導</div>
+      </div>
+    </div>
+    <div class="mail-body">
+      <div class="email-sim">
+        <div class="email-header-bar">
+          <div class="email-logo">biz<span>cre</span></div>
+        </div>
+        <div class="email-content">
+          <div class="email-greeting">○○さん、こんにちは。</div>
+          <div class="email-body-text">bizcreへようこそ。
+
+トライアル登録、ありがとうございます。
+
+私たちがこのサービスをつくった理由は、ひとつです。
+「中小企業を、100年続けるため」に。
+
+倒産する企業の平均寿命は約23年。
+経営者は毎日、孤独に意思決定を続けています。
+情報やノウハウが少ない中で、気合と勘だけで走り続けている。
+
+でも、長く続く会社には共通点があります。
+それは「経営の型」を持っている、ということです。</div>
+
+          <div class="email-highlight">ビズクリメソッドとは
+
+理念 → ビジョン → 経営戦略 → 計画 → 実行
+
+この流れを一気通貫で考え、更新し続けるプロセスのことです。
+ツールではありません。「考え方の型」です。</div>
+
+          <div class="email-body-text">今日まずやること、ひとつだけお伝えします。
+
+アプリにログインして、「現状把握」の画面を開いてください。
+まず自社の現在地を整理するところから、すべてが始まります。
+
+迷ったらこのメールに返信してください。
+あなたの経営の地図を、一緒につくっていきましょう。</div>
+
+          <div class="email-cta-wrap">
+            <a href="#" class="email-cta">現状把握をはじめる →</a>
+          </div>
+
+          <div class="email-sig">ビズクリ チーム<br>bizcre.cloud</div>
+        </div>
+        <div class="email-footer-text">このメールはbizcreトライアル登録者にお送りしています。<br>配信停止はこちら</div>
+      </div>
+    </div>
+    <div class="mail-notes">
+      <div class="note-label">設計意図</div>
+      <div class="note-text">最初のメールは「機能説明」ではなくWhyから入る。登録直後の感情的テンションを受け止め、「なぜここにいるか」を確認させる。アクションはひとつだけ（現状把握を開く）に絞り、離脱を防ぐ。</div>
+    </div>
+  </div>
+
+  <!-- Mail 2: Day 1 -->
+  <div class="mail-card">
+    <div class="mail-header">
+      <div class="day-badge day-green">Day 1</div>
+      <div class="mail-meta">
+        <div class="mail-subject">【bizcre】AIにできなくて、あなたにしかできないこと</div>
+        <div class="mail-intent">Why教育メール。「考えるプロセス」を持つことの差別化を伝える</div>
+      </div>
+    </div>
+    <div class="mail-body">
+      <div class="email-sim">
+        <div class="email-header-bar">
+          <div class="email-logo">biz<span>cre</span></div>
+        </div>
+        <div class="email-content">
+          <div class="email-greeting">○○さん、こんにちは。</div>
+          <div class="email-body-text">最近こんな声をよく聞きます。
+
+「ChatGPTで経営計画書を書いてもらった。でも、なんか違う気がして使えていない」
+
+なぜそう感じるか、わかりますか？
+
+AIは「答え」を出すのが得意です。
+でも、あなたの会社の「問い」を立てることはできません。
+
+自社の強みは何か。
+どの顧客に、何を届けたいのか。
+5年後、この会社をどんな姿にしたいのか。
+
+これは、あなた自身が考えるしかないのです。
+
+ビズクリが提供しているのは「考えるプロセス」です。</div>
+
+          <div class="email-highlight">AIと高額コンサルの間にある「空白地帯」
+
+・AIは計画書は作れる。でも答え合わせができない。
+・高額コンサルは伴走できる。でも支援が終われば型が残らない。
+
+ビズクリは、経営者が自分で「考える型」を持てるようにする。
+それが私たちの存在理由です。</div>
+
+          <div class="email-body-text">今日のアクションは、ひとつ。
+
+「なぜ自分はこの事業をやっているのか」を
+アプリの「理念・ビジョン」セクションに書いてみてください。
+
+上手く書けなくてもいいです。
+書こうとする行為そのものが、経営の型をつくる最初の一歩です。</div>
+
+          <div class="email-cta-wrap">
+            <a href="#" class="email-cta">理念・ビジョンを書いてみる →</a>
+          </div>
+          <div class="email-sig">ビズクリ チーム<br>bizcre.cloud</div>
+        </div>
+        <div class="email-footer-text">このメールはbizcreトライアル登録者にお送りしています。</div>
+      </div>
+    </div>
+    <div class="mail-notes">
+      <div class="note-label">設計意図</div>
+      <div class="note-text">AI競合への直接的な比較を避けつつ、「AIでは解決しない本質的な問い」を提示することでビズクリの差別化を腹落ちさせる。アクションは「理念を書く」という感情的なものに設定し、ツールへの愛着を生む。</div>
+    </div>
+  </div>
+
+  <!-- Mail 3: Day 3 -->
+  <div class="mail-card">
+    <div class="mail-header">
+      <div class="day-badge day-green">Day 3</div>
+      <div class="mail-meta">
+        <div class="mail-subject">【bizcre】「分析が苦手」という方へ。まず、ここから始めましょう</div>
+        <div class="mail-intent">現状把握フレームワーク（3C・SWOT）の使い方と心理的ハードル低減</div>
+      </div>
+    </div>
+    <div class="mail-body">
+      <div class="email-sim">
+        <div class="email-header-bar">
+          <div class="email-logo">biz<span>cre</span></div>
+        </div>
+        <div class="email-content">
+          <div class="email-greeting">○○さん、こんにちは。</div>
+          <div class="email-body-text">「3C分析」「SWOT分析」——
+
+こういった言葉を聞いただけで
+「自分には難しい」と思う方が、実は多くいます。
+
+でも、安心してください。
+
+これらは「難しい分析ツール」ではありません。
+「今の自社を正しく見るための問い集め」です。
+
+ポイントはただひとつ。
+「完璧に埋めよう」としないこと。
+
+わからないところは空欄でいいです。
+「ここがわからない」という発見自体が、
+経営の盲点を教えてくれます。</div>
+
+          <div class="email-highlight">3C分析、30分でできる始め方
+
+Customer（顧客）：自社の主要な顧客は誰か。何に困っているか。
+Competitor（競合）：近い事業をしている会社はどこか。何が違うか。
+Company（自社）：自社が他と違うのは何か。強みはどこか。
+
+この3つを箇条書きで書くだけで十分です。</div>
+
+          <div class="email-body-text">3Cが埋まると、自然にSWOTが見えてきます。
+SWOTが見えると、自社の「やるべきこと」が浮かび上がってきます。
+
+これが「現状把握」の力です。
+
+今日、15分だけアプリを開いてみてください。
+まず「Customer（顧客）」の欄だけ埋めてみましょう。</div>
+
+          <div class="email-cta-wrap">
+            <a href="#" class="email-cta">3C分析をはじめる →</a>
+          </div>
+          <div class="email-sig">ビズクリ チーム<br>bizcre.cloud</div>
+        </div>
+        <div class="email-footer-text">このメールはbizcreトライアル登録者にお送りしています。</div>
+      </div>
+    </div>
+    <div class="mail-notes">
+      <div class="note-label">設計意図</div>
+      <div class="note-text">「分析アレルギー」を持つ経営者（特に承継層・職人脱却層）向けに、ハードルを最小化する。「完璧に埋めなくていい」「わからないが発見だ」という再フレーミングで、行動を促す。</div>
+    </div>
+  </div>
+
+  <!-- Mail 4: Day 5 -->
+  <div class="mail-card">
+    <div class="mail-header">
+      <div class="day-badge day-green">Day 5</div>
+      <div class="mail-meta">
+        <div class="mail-subject">【bizcre】なぜ「体幹」なのか。経営の本質について</div>
+        <div class="mail-intent">ビズクリのコアフィロソフィーを語る。感情・共感を高めるブランドメール</div>
+      </div>
+    </div>
+    <div class="mail-body">
+      <div class="email-sim">
+        <div class="email-header-bar">
+          <div class="email-logo">biz<span>cre</span></div>
+        </div>
+        <div class="email-content">
+          <div class="email-greeting">○○さん、こんにちは。</div>
+          <div class="email-body-text">今日は少し、違う話をさせてください。
+
+「会社の体幹を鍛える」——
+
+これが私たちのビズクリに込めた言葉です。
+
+体幹とは何か。
+体幹とは、すべての動作の「軸」になる部分です。
+腕を使っても、足を動かしても、必ず体幹が支えている。
+
+経営も同じです。
+
+どんな事業をしていても、
+どんな環境の変化があっても、
+「なぜこの会社は存在するのか」という問いが揺らがなければ
+経営者は判断できます。動けます。チームを引っ張れます。
+
+反対に、体幹がない会社はどうなるか。
+目先の数字に振り回される。
+流行りを追いかけては止まる。
+経営者が疲弊し、チームが迷走する。</div>
+
+          <div class="email-highlight">「理念-ビジョン-戦略-計画」の一気通貫
+
+この4つが繋がっているとき、会社に「体幹」が生まれます。
+ビズクリが目指しているのは、この体幹を持った企業を増やすことです。</div>
+
+          <div class="email-body-text">○○さんが今、ビズクリで入力していること。
+それは「データ」ではありません。
+あなたの会社の体幹をつくっているのです。
+
+今週、もう一度アプリを開いてみてください。
+「これは計画書づくりではなく、体幹トレーニングだ」
+そう思いながら使ってみてください。</div>
+
+          <div class="email-cta-wrap">
+            <a href="#" class="email-cta">アプリを開く →</a>
+          </div>
+          <div class="email-sig">ビズクリ チーム<br>bizcre.cloud</div>
+        </div>
+        <div class="email-footer-text">このメールはbizcreトライアル登録者にお送りしています。</div>
+      </div>
+    </div>
+    <div class="mail-notes">
+      <div class="note-label">設計意図</div>
+      <div class="note-text">機能説明を一切しないブランドメール。「体幹」という比喩を使ってビズクリのWhyを感情的に伝える。ツールへの愛着とブランドへの共感を高め、有料継続の「感情的理由」を積み立てる。</div>
+    </div>
+  </div>
+
+  <!-- Mail 5: Day 7 -->
+  <div class="mail-card">
+    <div class="mail-header">
+      <div class="day-badge day-green">Day 7</div>
+      <div class="mail-meta">
+        <div class="mail-subject">【bizcre】1週間、どこまで来ましたか？</div>
+        <div class="mail-intent">チェックイン。進捗に応じた2段階メッセージ（進んでいる／止まっている）</div>
+      </div>
+    </div>
+    <div class="mail-body">
+      <div class="email-sim">
+        <div class="email-header-bar">
+          <div class="email-logo">biz<span>cre</span></div>
+        </div>
+        <div class="email-content">
+          <div class="email-greeting">○○さん、こんにちは。</div>
+          <div class="email-body-text">トライアル開始から、1週間が経ちました。
+
+少し立ち止まって、確認させてください。
+
+アプリは使えていますか？
+何か入力しましたか？
+それとも、まだログインできていませんか？
+
+どんな状態でも、大丈夫です。
+経営者は忙しい。それは私たちもわかっています。</div>
+
+          <div class="email-highlight">もし「まだ何も入力できていない」という方へ
+
+今日、5分だけ試してください。
+アプリを開いて、「会社名」と「事業の一言説明」を入れるだけでいいです。
+それだけで、体幹トレーニングは始まっています。</div>
+
+          <div class="email-body-text">もし「少し進めた」という方へ、お伝えします。
+
+現状把握が終わったら、次のステップは「戦略策定」です。
+「どこで戦うか」「どう勝つか」を考えるフェーズです。
+
+経営の地図が、少しずつ形になってきています。
+残り23日間、一緒に続けましょう。
+
+何かわからないこと、詰まっていることがあれば
+このメールに返信してください。必ず読みます。</div>
+
+          <div class="email-cta-wrap">
+            <a href="#" class="email-cta">今すぐアプリを開く →</a>
+          </div>
+          <div class="email-sig">ビズクリ チーム<br>bizcre.cloud</div>
+        </div>
+        <div class="email-footer-text">このメールはbizcreトライアル登録者にお送りしています。</div>
+      </div>
+    </div>
+    <div class="mail-notes">
+      <div class="note-label">設計意図</div>
+      <div class="note-text">この時点でのログイン率・入力率をトリガーに送信分岐させると理想。未ログイン者には「5分で最小アクション」を提示し離脱を防ぐ。進捗ありの人には「次のステップ」を提示して勢いをつける。「返信してください」という直接的な対話誘導が重要。</div>
+    </div>
+  </div>
+
+</div><!-- /Phase 1 -->
+
+<div class="divider"></div>
+
+<!-- ========== PHASE 2 ========== -->
+<div class="phase-section">
+  <div class="phase-title">
+    <span class="phase-tag tag-purple">Phase 2</span>
+    <span class="phase-name">習慣・深化　Day 8〜21</span>
+    <span class="phase-desc">使い続ける理由をつくる。チームと専門家への橋渡し。</span>
+  </div>
+
+  <!-- Mail 6: Day 10 -->
+  <div class="mail-card">
+    <div class="mail-header">
+      <div class="day-badge day-purple">Day 10</div>
+      <div class="mail-meta">
+        <div class="mail-subject">【bizcre】受け継いだ会社と、あなたがつくる会社<span class="seg-badge seg-s">承継・改革層向け</span></div>
+        <div class="mail-intent">セグメント特化（後継者・二代目）。先代経営の「翻訳」という概念を伝える</div>
+      </div>
+    </div>
+    <div class="mail-body">
+      <div class="email-sim">
+        <div class="email-header-bar">
+          <div class="email-logo">biz<span>cre</span></div>
+        </div>
+        <div class="email-content">
+          <div class="email-greeting">○○さん、こんにちは。</div>
+          <div class="email-body-text">もし、あなたが事業を承継された方なら
+このメールを読んでいただきたいです。
+
+「先代のやってきたことを、否定したくはない。
+でも、このままでは続かないと感じている」
+
+そんな葛藤を抱えていませんか？
+
+実は、これはとても健全な感覚です。
+
+先代の経営は「勘」で動いていたように見えても、
+その裏には深い顧客理解や、長年の意思決定の積み重ねがある。
+それは本物の財産です。
+
+ただ、その財産が「暗黙知」のままでは
+次の世代に引き継げません。
+チームと共有できません。
+変化に対応できません。</div>
+
+          <div class="email-highlight">ビズクリがやることは「否定」ではなく「翻訳」
+
+先代の勘と経験を、論理と型に翻訳する。
+それがあなたの世代の仕事です。
+ビズクリは、その翻訳作業を一緒にやります。</div>
+
+          <div class="email-body-text">「強み分析」のセクションを開いてみてください。
+
+「先代が守り続けてきたものは何か」
+「自社が選ばれてきた理由は何か」
+
+この問いへの答えが、あなたの経営の出発点になります。</div>
+
+          <div class="email-cta-wrap">
+            <a href="#" class="email-cta">強み分析をはじめる →</a>
+          </div>
+          <div class="email-sig">ビズクリ チーム<br>bizcre.cloud</div>
+        </div>
+        <div class="email-footer-text">このメールはbizcreトライアル登録者にお送りしています。</div>
+      </div>
+    </div>
+    <div class="mail-notes">
+      <div class="note-label">設計意図</div>
+      <div class="note-text">承継・改革層の最深の感情（先代への罪悪感と変革への使命感の葛藤）を代弁する。「否定ではなく翻訳」というリフレームで心理的抵抗を解除し、アプリへの深いエンゲージメントを生む。職人脱却層向けには「頭の中の構想を型にする」という別バージョンを用意する。</div>
+    </div>
+  </div>
+
+  <!-- Mail 7: Day 12 -->
+  <div class="mail-card">
+    <div class="mail-header">
+      <div class="day-badge day-purple">Day 12</div>
+      <div class="mail-meta">
+        <div class="mail-subject">【bizcre】戦略は「立てる」より「使う」もの</div>
+        <div class="mail-intent">計画書止まりにしない。KPI・実行管理の価値と継続利用の訴求</div>
+      </div>
+    </div>
+    <div class="mail-body">
+      <div class="email-sim">
+        <div class="email-header-bar">
+          <div class="email-logo">biz<span>cre</span></div>
+        </div>
+        <div class="email-content">
+          <div class="email-greeting">○○さん、こんにちは。</div>
+          <div class="email-body-text">少し正直に話させてください。
+
+世の中には「経営計画書」を作るためのツールがたくさんあります。
+補助金申請、融資の面談、株主へのプレゼン——
+「提出用」に磨かれた計画書は、それなりに作れます。
+
+でも、ビズクリが目指しているのはそこではありません。
+
+「提出して終わり」ではなく「使い続ける経営の型」。
+
+その違いはどこから来るか。
+それは、KPIを設定して、実行を管理して、
+結果を見て、戦略を修正するというサイクルにあります。</div>
+
+          <div class="email-highlight">経営の本当の価値は「PDCAを回す」ことにある
+
+戦略策定（P）→ 実行（D）→ 結果確認（C）→ 修正（A）
+
+この一周を回せるようになったとき、初めて戦略が「生きている」状態になります。
+ビズクリは、この全サイクルをサポートする設計になっています。</div>
+
+          <div class="email-body-text">「KPI設定」のセクションを開いてみてください。
+
+売上・顧客数・リピート率——
+数字の目標を設定するだけでなく、
+「なぜその数字を目指すのか」を言語化できる構造になっています。
+
+これが、計画書を「生きた経営」に変える装置です。</div>
+
+          <div class="email-cta-wrap">
+            <a href="#" class="email-cta">KPI設定を試す →</a>
+          </div>
+          <div class="email-sig">ビズクリ チーム<br>bizcre.cloud</div>
+        </div>
+        <div class="email-footer-text">このメールはbizcreトライアル登録者にお送りしています。</div>
+      </div>
+    </div>
+    <div class="mail-notes">
+      <div class="note-label">設計意図</div>
+      <div class="note-text">「計画書作成ツール」との差別化を実行管理・PDCAの観点から伝える。この文脈で「継続利用（月額）の価値」が自然に伝わる設計。特に補助金・融資後層（計画書疲れ層）に刺さる訴求。</div>
+    </div>
+  </div>
+
+  <!-- Mail 8: Day 14 -->
+  <div class="mail-card">
+    <div class="mail-header">
+      <div class="day-badge day-purple">Day 14</div>
+      <div class="mail-meta">
+        <div class="mail-subject">【bizcre】折り返し。あなたの現在地を確認しましょう</div>
+        <div class="mail-intent">2週間マイルストーン。「ここまで来た価値」の可視化と残り16日間の見通し</div>
+      </div>
+    </div>
+    <div class="mail-body">
+      <div class="email-sim">
+        <div class="email-header-bar">
+          <div class="email-logo">biz<span>cre</span></div>
+        </div>
+        <div class="email-content">
+          <div class="email-greeting">○○さん、こんにちは。</div>
+          <div class="email-body-text">トライアル開始から2週間が経ちました。
+
+今日は少し立ち止まって、振り返ってみましょう。
+
+この2週間で、あなたは何かを入力しましたか？
+顧客のこと。競合のこと。自社の強みのこと。
+理念や、ビジョンのこと。
+
+もし何か書いたなら、それはすでに「経営の型の一部」です。
+
+頭の中にあったものを、言葉にした。
+漠然としていたものを、整理した。
+この作業の価値は、数字では測れません。</div>
+
+          <div class="email-highlight">残り16日間でできること
+
+・現状把握が終わっていない → まず3C分析を完成させる
+・現状把握が終わった → 戦略策定（どこで戦うか）に進む
+・戦略策定も進んでいる → KPI設定と実行計画へ
+
+どの段階にいても、続けることに価値があります。</div>
+
+          <div class="email-body-text">ひとつお伝えしたいことがあります。
+
+経営の型をつくるのに必要な時間は、30日ではありません。
+5年、10年かかります。
+
+30日のトライアルは、その入口を体験するものです。
+「続けるかどうか」は、入口を体験してから判断してください。
+
+今日、アプリを開いて進捗を確認してみましょう。</div>
+
+          <div class="email-cta-wrap">
+            <a href="#" class="email-cta">進捗を確認する →</a>
+          </div>
+          <div class="email-sig">ビズクリ チーム<br>bizcre.cloud</div>
+        </div>
+        <div class="email-footer-text">このメールはbizcreトライアル登録者にお送りしています。</div>
+      </div>
+    </div>
+    <div class="mail-notes">
+      <div class="note-label">設計意図</div>
+      <div class="note-text">「30日で全完了リスク」への対策として「30日は入口に過ぎない」という期待値設定を自然に行う。同時に、これまでの入力行為を肯定・承認することで継続モチベーションを高める。</div>
+    </div>
+  </div>
+
+  <!-- Mail 9: Day 17 -->
+  <div class="mail-card">
+    <div class="mail-header">
+      <div class="day-badge day-purple">Day 17</div>
+      <div class="mail-meta">
+        <div class="mail-subject">【bizcre】一人で悩まなくていい。チームと共有しませんか</div>
+        <div class="mail-intent">チームプランへのアップグレード訴求。「社長の頭の中を可視化する」使い方</div>
+      </div>
+    </div>
+    <div class="mail-body">
+      <div class="email-sim">
+        <div class="email-header-bar">
+          <div class="email-logo">biz<span>cre</span></div>
+        </div>
+        <div class="email-content">
+          <div class="email-greeting">○○さん、こんにちは。</div>
+          <div class="email-body-text">少し質問させてください。
+
+「社長の頭の中が、幹部に伝わっていない」
+「戦略の方向性を、チームで共有できていない」
+
+こういった悩みはありますか？
+
+多くの経営者が、孤独に戦略を考えています。
+そして、頭の中にあるビジョンや方向性が
+うまく言語化できず、チームに伝わらない。
+
+ビズクリで整理した「経営の型」は、
+チームと共有することで、もっと力を発揮します。
+
+社長の「構想」が、組織の「共通言語」になる。
+これが、チームプランの価値です。</div>
+
+          <div class="email-highlight">チームプランでできること
+
+・複数メンバーが同じ戦略フレームワークを参照・更新できる
+・幹部との進捗確認を、同じ「地図」の上で話せる
+・「社長の言っていることがわからない」をなくせる
+
+月6,000円（5ユーザーまで）。1人あたり月1,200円。</div>
+
+          <div class="email-body-text">まず一人でやってみて「使えそう」と思った方は、
+チームに広げるタイミングかもしれません。
+
+今すぐではなくても大丈夫です。
+ただ、こういう使い方があることを、頭の片隅に置いておいてください。</div>
+
+          <div class="email-cta-wrap">
+            <a href="#" class="email-cta">チームプランを見る →</a>
+          </div>
+          <div class="email-sig">ビズクリ チーム<br>bizcre.cloud</div>
+        </div>
+        <div class="email-footer-text">このメールはbizcreトライアル登録者にお送りしています。</div>
+      </div>
+    </div>
+    <div class="mail-notes">
+      <div class="note-label">設計意図</div>
+      <div class="note-text">チームプランへのアップグレードCVを自然に仕込む。「強引に売る」のではなく「こういう使い方もある」という提示にとどめることで、信頼を損なわずに認知させる。組織10名超の登録者にはより強い訴求に変更可。</div>
+    </div>
+  </div>
+
+  <!-- Mail 10: Day 19 -->
+  <div class="mail-card">
+    <div class="mail-header">
+      <div class="day-badge day-purple">Day 19</div>
+      <div class="mail-meta">
+        <div class="mail-subject">【bizcre】迷ったとき、「答え合わせ」をしてくれる専門家がいます</div>
+        <div class="mail-intent">ビズクリサポーター（診断士）への誘導。「アプリは入口」という文脈設定</div>
+      </div>
+    </div>
+    <div class="mail-body">
+      <div class="email-sim">
+        <div class="email-header-bar">
+          <div class="email-logo">biz<span>cre</span></div>
+        </div>
+        <div class="email-content">
+          <div class="email-greeting">○○さん、こんにちは。</div>
+          <div class="email-body-text">経営の型をつくっていると、必ずこういう瞬間が来ます。
+
+「これで合っているのか、自信が持てない」
+
+戦略の方向性、KPIの設定、実行計画の妥当性——
+正直、自分一人では答え合わせができません。
+
+これはビズクリの限界でもあります。
+アプリは「考える型」を提供できますが、
+「あなたの業界・あなたの会社に合った答え」を
+ローカライズする力は、人間の専門家に勝てません。
+
+だから私たちは、中小企業診断士の方々と一緒に
+このサービスをつくっています。</div>
+
+          <div class="email-highlight">ビズクリサポーターとは
+
+ビズクリ認定の中小企業診断士が、あなたの戦略策定に伴走します。
+・ビズクリアプリを使いながらの伴走相談
+・業界・業種に合わせたフレームワークのカスタマイズ
+・月次の進捗確認と戦略の修正
+
+「一人でやるのは不安」という方に最適です。</div>
+
+          <div class="email-body-text">まずは30分の無料相談から始められます。
+
+今すぐ相談でなくても構いません。
+「こういう選択肢がある」ということを知っておいてください。
+
+迷ったとき、孤独を感じたとき。
+あなたの横を走るガイドランナーが、ここにいます。</div>
+
+          <div class="email-cta-wrap">
+            <a href="#" class="email-cta">専門家への相談を見る →</a>
+          </div>
+          <div class="email-sig">ビズクリ チーム<br>bizcre.cloud</div>
+        </div>
+        <div class="email-footer-text">このメールはbizcreトライアル登録者にお送りしています。</div>
+      </div>
+    </div>
+    <div class="mail-notes">
+      <div class="note-label">設計意図</div>
+      <div class="note-text">「ガイドランナー」というブランドコンセプトを初めて明示的に使うメール。アプリの限界を正直に認めることで信頼を高め、診断士への接続という高LTV転換への導線を作る。補助金・融資後層（専門家との接触機会がある）に特に刺さる。</div>
+    </div>
+  </div>
+
+</div><!-- /Phase 2 -->
+
+<div class="divider"></div>
+
+<!-- ========== PHASE 3 ========== -->
+<div class="phase-section">
+  <div class="phase-title">
+    <span class="phase-tag tag-amber">Phase 3</span>
+    <span class="phase-name">決断・転換　Day 22〜30</span>
+    <span class="phase-desc">積み上げた価値を見せる。感情的に納得させて、続ける選択を促す。</span>
+  </div>
+
+  <!-- Mail 11: Day 22 -->
+  <div class="mail-card">
+    <div class="mail-header">
+      <div class="day-badge day-amber">Day 22</div>
+      <div class="mail-meta">
+        <div class="mail-subject">【bizcre】22日間で、あなたが手にしたもの</div>
+        <div class="mail-intent">価値想起メール。入力データを振り返り「これは財産」と伝える。有料継続への橋渡し</div>
+      </div>
+    </div>
+    <div class="mail-body">
+      <div class="email-sim">
+        <div class="email-header-bar">
+          <div class="email-logo">biz<span>cre</span></div>
+        </div>
+        <div class="email-content">
+          <div class="email-greeting">○○さん、こんにちは。</div>
+          <div class="email-body-text">トライアルも残り8日になりました。
+
+少し、振り返ってみましょう。
+
+この22日間で、あなたはアプリに何かを書きましたか？
+顧客の分析。競合との違い。自社の強み。
+理念、ビジョン、目標の数字。
+
+どれだけ少なくても、何か書いていたとしたら——
+それはもう、あなたの会社にとっての「財産」です。
+
+頭の中にあったものが、言葉になった。
+漠然としていた方向性が、少し形を持った。
+
+これは、経営計画書の「素材」ではありません。
+あなたの会社の「体幹の核」です。</div>
+
+          <div class="email-highlight">もしトライアルで終わったら、何が起きるか
+
+入力したデータは保存されていますが、
+有料プランに移行しない場合、更新や追加入力ができなくなります。
+
+経営の型は、一度作って終わりではありません。
+環境が変わるたびに、修正が必要です。
+それを続けられるのが、有料プランです。</div>
+
+          <div class="email-body-text">「月3,000円は高い」と思う前に、考えてみてください。
+
+経営コンサルタントに1時間相談すると、数万円かかります。
+経営計画書の作成を外注すると、数十万円かかります。
+
+ビズクリは月3,000円で、その「型」を自社に持てます。
+
+もちろん、プロの伴走には敵いません。
+でも「まず一人で始める」段階では、十分な力を発揮します。</div>
+
+          <div class="email-cta-wrap">
+            <a href="#" class="email-cta">有料プランへ移行する →</a>
+          </div>
+          <div class="email-sig">ビズクリ チーム<br>bizcre.cloud</div>
+        </div>
+        <div class="email-footer-text">このメールはbizcreトライアル登録者にお送りしています。</div>
+      </div>
+    </div>
+    <div class="mail-notes">
+      <div class="note-label">設計意図</div>
+      <div class="note-text">「損失回避」心理を自然に使う。入力データが「財産」という枠組みで、トライアル終了＝財産の喪失という感情を生む。価格比較は「高い」印象を消すための文脈付けとして使用。</div>
+    </div>
+  </div>
+
+  <!-- Mail 12: Day 25 -->
+  <div class="mail-card">
+    <div class="mail-header">
+      <div class="day-badge day-amber">Day 25</div>
+      <div class="mail-meta">
+        <div class="mail-subject">【bizcre】続けることが、最大の経営戦略です</div>
+        <div class="mail-intent">有料プランの正式案内。機能比較ではなく行動・姿勢訴求</div>
+      </div>
+    </div>
+    <div class="mail-body">
+      <div class="email-sim">
+        <div class="email-header-bar">
+          <div class="email-logo">biz<span>cre</span></div>
+        </div>
+        <div class="email-content">
+          <div class="email-greeting">○○さん、こんにちは。</div>
+          <div class="email-body-text">ひとつ、問いかけさせてください。
+
+「経営に、型を持つ経営者」と
+「経営に、型を持たない経営者」の違いは何でしょうか。
+
+能力の差？　情報量の差？
+
+私たちはそうは思いません。
+
+続けたかどうかの差、だと考えています。
+
+経営の型は、一度考えれば終わりではありません。
+市場が変われば、戦略を更新する。
+組織が変われば、計画を修正する。
+これを何年も続けた経営者が「型を持つ経営者」になります。</div>
+
+          <div class="email-highlight">ビズクリ 有料プランのご案内
+
+【ベーシックプラン】個人の経営者向け
+月額 3,000円 / 年額 30,000円（月2,500円相当）
+1ユーザー。全フレームワーク利用可。
+
+【チームプラン】幹部と共有したい方向け
+月額 6,000円 / 年額 60,000円（月5,000円相当）
+5ユーザー。共同編集・共有機能付き。
+
+※30日間無料トライアル終了後、そのまま継続できます。</div>
+
+          <div class="email-body-text">「まず一年、続けてみる」という選択をしてください。
+
+一年後、あなたの経営の地図は
+今とは比べ物にならないくらい、詳細になっているはずです。
+
+続けることが、最大の経営戦略です。</div>
+
+          <div class="email-cta-wrap">
+            <a href="#" class="email-cta">プランを選んで続ける →</a>
+          </div>
+          <div class="email-sig">ビズクリ チーム<br>bizcre.cloud</div>
+        </div>
+        <div class="email-footer-text">このメールはbizcreトライアル登録者にお送りしています。</div>
+      </div>
+    </div>
+    <div class="mail-notes">
+      <div class="note-label">設計意図</div>
+      <div class="note-text">機能比較表を出さず「続けるという姿勢こそが差別化」という行動哲学で訴求。プランの提示は自然に行うが、メールの主役はコピーライティング。「一年、続ける」という具体的な期間コミットを促す。</div>
+    </div>
+  </div>
+
+  <!-- Mail 13: Day 28 -->
+  <div class="mail-card">
+    <div class="mail-header">
+      <div class="day-badge day-amber">Day 28</div>
+      <div class="mail-meta">
+        <div class="mail-subject">【bizcre】残り2日。続けますか、それとも——</div>
+        <div class="mail-intent">緊急性。損失回避訴求。シンプルなYes/No構造で決断を迫る</div>
+      </div>
+    </div>
+    <div class="mail-body">
+      <div class="email-sim">
+        <div class="email-header-bar">
+          <div class="email-logo">biz<span>cre</span></div>
+        </div>
+        <div class="email-content">
+          <div class="email-greeting">○○さん、こんにちは。</div>
+          <div class="email-body-text">トライアル終了まで、残り2日です。
+
+単刀直入に聞かせてください。
+
+続けますか？
+
+「はい」なら、今すぐプランを選んでください。
+28日間分の入力データが、そのまま引き継がれます。
+
+「まだ迷っている」なら、一つだけ考えてみてください。
+
+半年後、「あのとき続けておけばよかった」と思う可能性はありますか？
+
+もしそう思うなら、続けてください。
+経営の型は、早く始めるほど早く完成に近づきます。</div>
+
+          <div class="email-highlight">今すぐ移行するとお得
+
+年額プランへの移行で月額比 約17%割引。
+ベーシック年額：30,000円（月2,500円相当）
+チーム年額：60,000円（月5,000円相当）</div>
+
+          <div class="email-body-text">何か迷っていることがあれば、このメールに返信してください。
+直接お答えします。</div>
+
+          <div class="email-cta-wrap">
+            <a href="#" class="email-cta">今すぐ継続する →</a>
+          </div>
+          <div class="email-sig">ビズクリ チーム<br>bizcre.cloud</div>
+        </div>
+        <div class="email-footer-text">このメールはbizcreトライアル登録者にお送りしています。</div>
+      </div>
+    </div>
+    <div class="mail-notes">
+      <div class="note-label">設計意図</div>
+      <div class="note-text">もっともシンプルなクロージングメール。長い説明を排除し「続けますか？」という一問だけを中心に置く。「返信してください」という直接対話誘導は転換率を高める重要な要素。このメール未転換者は翌日電話フォロー候補リストへ。</div>
+    </div>
+  </div>
+
+  <!-- Mail 14: Day 30 -->
+  <div class="mail-card">
+    <div class="mail-header">
+      <div class="day-badge day-coral">Day 30</div>
+      <div class="mail-meta">
+        <div class="mail-subject">【bizcre】最終日に、一つだけ伝えさせてください</div>
+        <div class="mail-intent">感謝 ＋ Whyで締めるラストメール。強い売り込みより共感で終わる</div>
+      </div>
+    </div>
+    <div class="mail-body">
+      <div class="email-sim">
+        <div class="email-header-bar">
+          <div class="email-logo">biz<span>cre</span></div>
+        </div>
+        <div class="email-content">
+          <div class="email-greeting">○○さん、こんにちは。</div>
+          <div class="email-body-text">今日で、30日間のトライアルが終わります。
+
+まず、使ってくれてありがとうございました。
+
+どれだけ使えた・使えなかったに関わらず、
+「経営の型をつくろう」と思ってくれたこと自体に、意味があります。
+
+一つだけ、お伝えさせてください。
+
+私たちがビズクリをつくった理由は、ビジネスのためではありません。
+「中小企業を100年続けるため」です。
+
+日本の企業の99.7%は中小企業です。
+その会社が、強く・長くあり続けること。
+経営者が孤独にならないこと。
+チームが同じ方向を向いて動けること。
+
+その実現のために、私たちはビズクリを作り続けています。</div>
+
+          <div class="email-highlight">もし続けるなら、ここから。
+
+有料プランへ移行して、経営の型づくりを続けてください。
+30日間の積み上げは、そのまま引き継がれます。
+
+もし今は続けないとしても、また戻ってきてください。
+経営に型が必要な「局面」は、必ずまた来ます。</div>
+
+          <div class="email-body-text">○○さんの会社が、強く・長くあり続けることを願っています。
+
+どんな選択をしても、ビズクリはあなたの経営の隣を走り続けます。</div>
+
+          <div class="email-cta-wrap">
+            <a href="#" class="email-cta">経営の型を続ける →</a>
+          </div>
+          <div class="email-sig">ビズクリ チーム<br>bizcre.cloud</div>
+        </div>
+        <div class="email-footer-text">このメールはbizcreトライアル登録者にお送りしています。</div>
+      </div>
+    </div>
+    <div class="mail-notes">
+      <div class="note-label">設計意図</div>
+      <div class="note-text">最後は「売り込み」で終わらない。Whyに戻ることで、転換しなかった人にも「いつか戻ってくる」という感情を残す。「また来てください」という言葉は、転換しなかった人への長期ロイヤルティ設計。転換した人には翌日から「有料ユーザー向けオンボーディングシーケンス」へ自動移行する。</div>
+    </div>
+  </div>
+
+</div><!-- /Phase 3 -->
+
+<div class="divider"></div>
+
+<!-- Summary notes -->
+<div class="cover" style="margin-top:0">
+  <div class="cover-label">実装メモ</div>
+  <div class="cover-title" style="font-size:16px;margin-bottom:1rem">セグメント分岐・行動トリガーの設計</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;font-size:13px;line-height:1.8;color:#555">
+    <div>
+      <div style="font-weight:600;color:#222;margin-bottom:.5rem">登録時セグメント分岐（推奨）</div>
+      承継・改革層：Day 10で「受け継いだ会社」版を配信<br>
+      職人脱却層：Day 10で「頭の中の構想を型に」版を配信<br>
+      補助金・融資後層：Day 12・19のメールを強調<br>
+      多角化・新規事業層：Day 17のチーム訴求を強調
+    </div>
+    <div>
+      <div style="font-weight:600;color:#222;margin-bottom:.5rem">行動トリガーによる分岐（理想）</div>
+      Day 7時点で未ログイン → 「5分で最小アクション」シナリオへ<br>
+      Day 22以降に有料転換済 → Day 25・28の転換メールをスキップ<br>
+      Day 28に未転換 → 翌日に電話フォロー候補リストへ追加<br>
+      Day 30に未転換 → 60日後に「復活」メールを予約送信
+    </div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>

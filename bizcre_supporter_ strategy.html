@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>bizcre ビズクリサポーター拡販戦略 設計書 v2</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;font-size:14px;line-height:1.8;color:#1a1a1a;background:#f7f6f3;padding:2rem 1rem}
+.container{max-width:840px;margin:0 auto}
+
+.cover{background:#fff;border:1px solid #e0ddd6;border-radius:12px;padding:2.5rem;margin-bottom:2rem}
+.cover-label{font-size:11px;letter-spacing:.1em;color:#888;margin-bottom:.6rem}
+.cover-title{font-size:22px;font-weight:600;color:#111;margin-bottom:.75rem;line-height:1.4}
+.cover-sub{font-size:13px;color:#555;line-height:1.8}
+.cover-meta{display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:1.25rem}
+.meta-item{font-size:12px;color:#888}
+.meta-item strong{color:#444}
+
+/* サポーターフロー図 */
+.flow-wrap{background:#fff;border:1px solid #e0ddd6;border-radius:10px;padding:1.5rem;margin-bottom:1.5rem}
+.flow-title{font-size:11px;font-weight:600;letter-spacing:.08em;color:#888;margin-bottom:1.25rem;text-transform:uppercase}
+.flow-steps{display:flex;align-items:stretch;gap:0}
+.flow-step{flex:1;text-align:center;padding:.75rem .5rem;position:relative}
+.flow-step-inner{border-radius:8px;padding:.65rem .5rem;height:100%}
+.flow-arrow{display:flex;align-items:center;padding:0 4px;color:#aaa;font-size:14px;flex-shrink:0}
+.fs-0{background:#f7f6f3;border:1px solid #e0ddd6}
+.fs-1{background:#E1F5EE;border:1px solid #9FE1CB}
+.fs-2{background:#EEEDFE;border:1px solid #CECBF6}
+.fs-3{background:#1D9E75;border:1px solid #0F6E56}
+.fs-4{background:#FAEEDA;border:1px solid #FAC775}
+.flow-step-label{font-size:10px;font-weight:600;margin-bottom:3px}
+.flow-step-name{font-size:12px;font-weight:600;line-height:1.4}
+.flow-step-sub{font-size:10px;margin-top:3px;line-height:1.4}
+.color-w{color:#fff}
+.color-g{color:#0F6E56}
+.color-p{color:#3C3489}
+.color-a{color:#633806}
+.color-gr{color:#444}
+
+/* Section */
+.section{background:#fff;border:1px solid #e0ddd6;border-radius:10px;margin-bottom:1.5rem;overflow:hidden}
+.sec-header{padding:1rem 1.5rem;border-bottom:1px solid #f0ede6;display:flex;align-items:flex-start;gap:1rem}
+.sec-num{flex-shrink:0;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;margin-top:1px}
+.sn-g{background:#E1F5EE;color:#0F6E56}
+.sn-p{background:#EEEDFE;color:#3C3489}
+.sn-a{background:#FAEEDA;color:#633806}
+.sec-header-text h2{font-size:16px;font-weight:600;color:#111;margin-bottom:3px}
+.sec-header-text p{font-size:12px;color:#888}
+.sec-body{padding:1.25rem 1.5rem}
+
+.tag{display:inline-block;font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;margin-right:4px;vertical-align:middle}
+.tg{background:#E1F5EE;color:#0F6E56}
+.tp{background:#EEEDFE;color:#3C3489}
+.ta{background:#FAEEDA;color:#633806}
+.tc{background:#FAECE7;color:#712B13}
+.tb{background:#E6F1FB;color:#0C447C}
+
+h3{font-size:14px;font-weight:600;color:#222;margin:1rem 0 .4rem}
+h4{font-size:13px;font-weight:600;color:#333;margin:.75rem 0 .3rem}
+p{font-size:13px;color:#444;line-height:1.8;margin-bottom:.6rem}
+ul,ol{margin:.4rem 0 .6rem 1.2rem;font-size:13px;color:#444;line-height:1.8}
+li{margin-bottom:.15rem}
+
+.highlight{background:#E1F5EE;border-left:3px solid #1D9E75;padding:.75rem 1rem;margin:.75rem 0;font-size:13px;color:#333;line-height:1.7;border-radius:0 6px 6px 0}
+.highlight-p{background:#EEEDFE;border-left:3px solid #534AB7;padding:.75rem 1rem;margin:.75rem 0;font-size:13px;color:#333;line-height:1.7;border-radius:0 6px 6px 0}
+.highlight-a{background:#FAEEDA;border-left:3px solid #BA7517;padding:.75rem 1rem;margin:.75rem 0;font-size:13px;color:#333;line-height:1.7;border-radius:0 6px 6px 0}
+.highlight-c{background:#FAECE7;border-left:3px solid #D85A30;padding:.75rem 1rem;margin:.75rem 0;font-size:13px;color:#333;line-height:1.7;border-radius:0 6px 6px 0}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:.75rem 0}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin:.75rem 0}
+.box{background:#f7f6f3;border:1px solid #e0ddd6;border-radius:8px;padding:.75rem 1rem}
+.box h4{margin-top:0}
+
+.table-wrap{overflow-x:auto;margin:.75rem 0}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{background:#f0ede6;padding:.5rem .75rem;text-align:left;font-weight:600;color:#444;border:1px solid #e0ddd6}
+td{padding:.5rem .75rem;border:1px solid #e8e5df;vertical-align:top;color:#444;line-height:1.6}
+tr:nth-child(even) td{background:#fcfcfa}
+
+.divider{height:1px;background:#e8e5df;margin:1.25rem 0}
+.step-row{display:flex;gap:.75rem;margin-bottom:.75rem;align-items:flex-start}
+.step-n{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:#E1F5EE;color:#0F6E56;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.step-n-p{background:#EEEDFE;color:#3C3489}
+.step-n-a{background:#FAEEDA;color:#633806}
+
+.kpi-card{background:#f7f6f3;border-radius:8px;padding:.75rem 1rem;text-align:center}
+.kpi-num{font-size:20px;font-weight:700;color:#111;margin-bottom:2px}
+.kpi-lbl{font-size:11px;color:#888}
+
+.target-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:.75rem;padding:.75rem;background:#f7f6f3;border-radius:8px}
+.target-badge{flex-shrink:0;font-size:11px;font-weight:600;padding:3px 8px;border-radius:6px;min-width:64px;text-align:center}
+
+.roadmap-row{display:flex;gap:10px;margin-bottom:.6rem;align-items:flex-start}
+.rm-phase{flex-shrink:0;width:80px;font-size:11px;font-weight:600;padding:3px 0;text-align:center;border-radius:10px}
+.rm-g{background:#E1F5EE;color:#0F6E56}
+.rm-p{background:#EEEDFE;color:#3C3489}
+.rm-a{background:#FAEEDA;color:#633806}
+.rm-content{flex:1;font-size:12px;color:#444;line-height:1.7}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Cover -->
+<div class="cover">
+  <div class="cover-label">bizcre ビズクリサポーター（診断士）活用戦略　v2</div>
+  <div class="cover-title">サポーター認定フローを起点にした<br>診断士ネットワーク拡販設計書</div>
+  <div class="cover-sub">
+    ビズクリサポーターは「ビズクリメソッド実践講座の受講 → 面談 → 認定」という既存の品質担保プロセスを経た、厳選された支援者です。<br>
+    この設計書は「既存の仕組みを崩さず、その入口を広げ、中にいるサポーターをもっと活性化する」ことを目的としています。
+  </div>
+  <div class="cover-meta">
+    <div class="meta-item"><strong>既存の認定フロー</strong>　実践講座受講 → 面談 → サポーター認定</div>
+    <div class="meta-item"><strong>戦略の核心</strong>　①入口を広げる ②既存を活性化する ③外部連携で広げる</div>
+  </div>
+</div>
+
+
+<!-- ===== サポーター認定フロー ===== -->
+<div class="flow-wrap">
+  <div class="flow-title">ビズクリサポーター 認定フロー（既存の仕組み）</div>
+  <div class="flow-steps">
+    <div class="flow-step">
+      <div class="flow-step-inner fs-0">
+        <div class="flow-step-label color-gr">STEP 0</div>
+        <div class="flow-step-name color-gr">潜在<br>診断士</div>
+        <div class="flow-step-sub color-gr">ビズクリを<br>まだ知らない</div>
+      </div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <div class="flow-step-inner fs-1">
+        <div class="flow-step-label color-g">STEP 1</div>
+        <div class="flow-step-name color-g">認知・<br>関心</div>
+        <div class="flow-step-sub color-g">セミナー・<br>口コミ・SNS</div>
+      </div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <div class="flow-step-inner fs-2">
+        <div class="flow-step-label color-p">STEP 2</div>
+        <div class="flow-step-name color-p">実践講座<br>受講</div>
+        <div class="flow-step-sub color-p">ビズクリ<br>メソッド習得</div>
+      </div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <div class="flow-step-inner fs-2">
+        <div class="flow-step-label color-p">STEP 3</div>
+        <div class="flow-step-name color-p">面談・<br>審査</div>
+        <div class="flow-step-sub color-p">ミッション<br>適合を確認</div>
+      </div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <div class="flow-step-inner fs-3">
+        <div class="flow-step-label color-w">STEP 4</div>
+        <div class="flow-step-name color-w">ビズクリ<br>サポーター</div>
+        <div class="flow-step-sub color-w">認定・活動<br>開始</div>
+      </div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <div class="flow-step-inner fs-4">
+        <div class="flow-step-label color-a">OUTPUT</div>
+        <div class="flow-step-name color-a">顧客への<br>伴走支援</div>
+        <div class="flow-step-sub color-a">bizcre導入<br>＋継続</div>
+      </div>
+    </div>
+  </div>
+  <p style="font-size:12px;color:#888;margin-top:1rem">
+    ★ この設計書の施策は、すべて「既存フローを起点」として組み立てています。フロー自体を変えるのではなく、各ステップへの流入を増やし、各ステップの通過率を高めることが目的です。
+  </p>
+</div>
+
+
+<!-- ===== 3つの戦略軸 ===== -->
+<div class="section">
+  <div class="sec-header">
+    <div class="sec-num sn-g">軸</div>
+    <div class="sec-header-text">
+      <h2>3つの戦略軸</h2>
+      <p>既存フローの「入口・中・外」を同時に設計する</p>
+    </div>
+  </div>
+  <div class="sec-body">
+    <div class="grid3">
+      <div class="box">
+        <div class="tag tg">軸A</div>
+        <h4>入口を広げる</h4>
+        <p style="font-size:12px">実践講座への流入を増やす。「受けてみたい」と思う診断士の数を増やすための接触戦略。</p>
+        <p style="font-size:11px;color:#888;margin-top:.4rem">STEP 0 → 1 → 2</p>
+      </div>
+      <div class="box">
+        <div class="tag tp">軸B</div>
+        <h4>既存サポーターを活性化する</h4>
+        <p style="font-size:12px">すでに認定されているサポーターが「もっと動きたくなる」環境をつくる。休眠・低活性の解消。</p>
+        <p style="font-size:11px;color:#888;margin-top:.4rem">STEP 4 → OUTPUT強化</p>
+      </div>
+      <div class="box">
+        <div class="tag ta">軸C</div>
+        <h4>外部連携で流入を作る</h4>
+        <p style="font-size:12px">支援機関・診断士協会・研修機関との連携で、個別アプローチでは届かない層に一気に接触する。</p>
+        <p style="font-size:11px;color:#888;margin-top:.4rem">STEP 0への流入加速</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== 軸A：入口施策 ===== -->
+<div class="section">
+  <div class="sec-header">
+    <div class="sec-num sn-g">A</div>
+    <div class="sec-header-text">
+      <h2>軸A：実践講座への入口を広げる</h2>
+      <p>「受けてみたい」と思う診断士を増やすための接触施策</p>
+    </div>
+  </div>
+  <div class="sec-body">
+
+    <div class="highlight-c">
+      <strong>大前提：実践講座 → 面談 → 認定、というフローは変えない</strong><br>
+      サポーターの品質はビズクリのサービス品質そのものです。「誰でもなれる」にすると、顧客への伴走の質が下がり、ビズクリ自体の評判が傷つきます。入口を広げることと、品質担保プロセスを守ることは両立させる。
+    </div>
+
+    <h3>施策A-1：「診断士向け無料体験セミナー」の定期開催</h3>
+    <p>実践講座の前に「まず体験できる」入口を作ります。「本講座ではなく、まず2時間で雰囲気をつかめる場」があることで、申込みのハードルが大きく下がります。</p>
+
+    <div class="grid2">
+      <div class="box">
+        <h4>セミナー内容（2時間）</h4>
+        <ul>
+          <li>ビズクリのWhyと「経営者のガイドランナー」コンセプト</li>
+          <li>ビズクリメソッドの概要（実践講座のダイジェスト）</li>
+          <li>サポーターとして活動している診断士の生の声</li>
+          <li>実践講座・サポーター認定の説明と質疑応答</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h4>集客ターゲット（優先順）</h4>
+        <ol>
+          <li>中小企業支援に関心のある独立・副業診断士</li>
+          <li>企業内診断士（副業解禁の流れで活動したい）</li>
+          <li>診断士資格を持つ支援機関職員</li>
+          <li>診断士受験者・合格者（合格直後が最も熱量高い）</li>
+        </ol>
+      </div>
+    </div>
+
+    <h3>施策A-2：既存サポーターを「伝道者」にする</h3>
+    <p>最も効果的な集客は「使っている診断士が周りに勧める」ことです。既存サポーターが自分のSNS・勉強会・研究会で「ビズクリを使っている」と話すだけで、同業への信頼性ある情報伝達になります。</p>
+
+    <div class="step-row">
+      <div class="step-n">1</div>
+      <div class="step-body">
+        <h4>サポーター向け「紹介しやすいコンテンツ」の提供</h4>
+        <p>SNSで引用・シェアしやすい短文・図解・事例カードを定期的にサポーターに届ける。「これをそのまま投稿してください」という形にすることで、発信の手間をゼロにする。</p>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="step-n">2</div>
+      <div class="step-body">
+        <h4>「診断士仲間を誘う」インセンティブ</h4>
+        <p>サポーターが体験セミナーに診断士仲間を誘い、その仲間が実践講座を受講・サポーター認定された場合に、紹介したサポーターに謝礼を提供。品質フローを通過した人だけが対象なので質は担保される。</p>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="step-n">3</div>
+      <div class="step-body">
+        <h4>ビズクリナレッジへのサポーター執筆記事の掲載</h4>
+        <p>サポーターが書いた「支援事例・活用体験記」をナレッジメディアに掲載。執筆者名と経歴が載ることで、診断士としての露出・権威性が高まる。読んだ他の診断士が「自分も書きたい（参加したい）」という動機になる。</p>
+      </div>
+    </div>
+
+    <h3>施策A-3：診断士試験合格者・新登録者へのタイミングアプローチ</h3>
+    <p>診断士として活動を始めようとしている「合格直後・登録直後」のタイミングは、新しいツールや方法論に最も開いている時期です。</p>
+
+    <div class="highlight">
+      <strong>アプローチの方法</strong><br>
+      ① 診断士登録更新・新規登録のタイミングで中小企業庁・診断士協会経由の情報に接触できないか打診<br>
+      ② 予備校・受験支援コミュニティ（TAC・LEC等）との提携で「合格後に使えるツール」として紹介<br>
+      ③ 「診断士1年目のためのビズクリメソッド入門」という特化コンテンツをナレッジで展開し、検索流入を狙う
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== 軸B：既存サポーター活性化 ===== -->
+<div class="section">
+  <div class="sec-header">
+    <div class="sec-num sn-p">B</div>
+    <div class="sec-header-text">
+      <h2>軸B：既存サポーターの活性化</h2>
+      <p>認定されて「いるだけ」の状態から、「動き続ける」状態へ</p>
+    </div>
+  </div>
+  <div class="sec-body">
+
+    <p>サポーターは面談を経て認定された信頼できる人たちです。しかし、認定後に「どう使えばいいかわからない」「顧客への提案のきっかけがない」という状態で休眠している人が一定数います。これは能力の問題ではなく、<strong style="color:#111">「動き出すための道具と場がない」</strong>という設計の問題です。</p>
+
+    <h3>施策B-1：「顧客への紹介パッケージ」の整備</h3>
+    <p>サポーターが「クライアントにビズクリを勧めたいが、どう説明すればいいかわからない」という状態を解消します。</p>
+
+    <div class="table-wrap">
+      <table>
+        <tr><th>アイテム</th><th>内容</th><th>使い場面</th></tr>
+        <tr>
+          <td>クライアント向けワンシート</td>
+          <td>「ビズクリとは何か・何ができるか・料金」をA4一枚に。サポーター名を入れてカスタマイズできる</td>
+          <td>面談時に手渡し・PDFで送付</td>
+        </tr>
+        <tr>
+          <td>専用紹介URL・QRコード</td>
+          <td>サポーターごとに個別のトライアル登録URLを発行。紹介者を自動追跡できる</td>
+          <td>メール・LINEで送付</td>
+        </tr>
+        <tr>
+          <td>30分デモ動画</td>
+          <td>サポーターがクライアントに見せながら説明できる動画。「こういう画面です」を一緒に見る</td>
+          <td>オンライン面談・初回導入時</td>
+        </tr>
+        <tr>
+          <td>よくある質問シート</td>
+          <td>「AIと何が違うの？」「30日で全部できる？」への標準回答集。サポーターが自信を持って説明できる</td>
+          <td>クライアントからの質問対応</td>
+        </tr>
+      </table>
+    </div>
+
+    <h3>施策B-2：継続的な収益設計（紹介報酬）</h3>
+    <p>サポーターがクライアントにビズクリを導入し、そのクライアントが有料継続している間、サポーターに継続報酬が入る仕組みです。「伴走しながら続けてもらう」ことが、サポーター自身の収入になります。</p>
+
+    <div class="table-wrap">
+      <table>
+        <tr><th>報酬タイプ</th><th>内容</th><th>設計意図</th></tr>
+        <tr>
+          <td><span class="tag tg">継続シェア</span></td>
+          <td>紹介クライアントの月額の15〜20%を継続中ずっと支払う<br>（ベーシック3,000円なら月450〜600円/クライアント）</td>
+          <td>「続けてもらうほど自分も得をする」設計。サポーターが離脱防止に自然に動く</td>
+        </tr>
+        <tr>
+          <td><span class="tag tp">初回転換金</span></td>
+          <td>トライアルから有料転換した際の一時金（1,000〜2,000円/件）</td>
+          <td>「紹介してみよう」という最初の一歩を踏み出させる即時報酬</td>
+        </tr>
+        <tr>
+          <td><span class="tag ta">累積特典</span></td>
+          <td>紹介クライアントが5社・10社を超えたとき、ビズクリの利用料を実質無料化または特典付与</td>
+          <td>「もっと紹介したい」という行動強化。サポーターの自社利用コストもカバーされる</td>
+        </tr>
+      </table>
+    </div>
+
+    <h3>施策B-3：サポーター同士の「事例共有コミュニティ」</h3>
+    <p>「自分はこんな使い方をしている」という情報交換の場を、サポーター限定で作ります。他のサポーターの活用事例を見ることが、「自分ももっと使おう」という動機になります。</p>
+
+    <div class="step-row">
+      <div class="step-n step-n-p">1</div>
+      <div class="step-body">
+        <h4>月次オンライン事例共有会（60分・サポーター限定）</h4>
+        <p>毎月1〜2名のサポーターが「ビズクリを使った支援事例」を発表。発表者はナレッジメディアへの掲載権を得る。聴衆は他サポーターの工夫を学べる。</p>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="step-n step-n-p">2</div>
+      <div class="step-body">
+        <h4>Slackまたはチャットグループ（常設）</h4>
+        <p>チャンネル：#活用事例・#クライアント対応相談・#新機能フィードバック・#雑談。ビズクリ運営がモデレーターとして参加し、毎週1回は返答する。「使っている人が集まっている」空気が休眠者を起こす。</p>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="step-n step-n-p">3</div>
+      <div class="step-body">
+        <h4>「MVP サポーター」の定期表彰</h4>
+        <p>四半期ごとに、紹介件数・活用深度・事例の質などを総合して優秀サポーターを表彰。金銭報酬より「認められた」という承認が、長期的なモチベーション維持に効く。</p>
+      </div>
+    </div>
+
+    <h3>施策B-4：「診断士 × bizcre」合同セミナーへの登壇機会</h3>
+    <p>bizcreが集客した経営者向けセミナーに、サポーターが登壇する機会を作ります。サポーターにとって「自分の見込み客に無料で会える場」であり、bizcreにとっては「信頼できる支援者の顔を経営者に見せる場」です。</p>
+
+    <div class="highlight-p">
+      <strong>セミナーフォーマット（月1回・オンライン60分）</strong><br>
+      ① bizcreのWhyと概要紹介（10分）→ ② サポーター診断士による支援事例発表（25分）→ ③ アプリデモ（15分）→ ④ Q&A＋トライアル登録案内（10分）<br><br>
+      登壇したサポーターのプロフィールはセミナー申込ページ・ナレッジに掲載。セミナー後の個別相談も受け付けることで、サポーターの直接受注につながる動線も設計する。
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== 軸C：外部連携 ===== -->
+<div class="section">
+  <div class="sec-header">
+    <div class="sec-num sn-a">C</div>
+    <div class="sec-header-text">
+      <h2>軸C：外部連携で流入を加速する</h2>
+      <p>個別アプローチでは届かない層への一括接触</p>
+    </div>
+  </div>
+  <div class="sec-body">
+
+    <h3>連携先の優先順位と狙い</h3>
+
+    <div class="target-row">
+      <div class="target-badge" style="background:#E1F5EE;color:#0F6E56">最優先</div>
+      <div>
+        <h4 style="margin:0 0 3px">中小企業診断士協会・各地域研究会</h4>
+        <p style="font-size:12px;margin:0">診断士の組織的な集まりに直接アプローチ。支部の勉強会・研究会でビズクリメソッドを紹介する機会を得る。「協会推奨ツール」に近い位置づけを目指す。CPD（継続的専門能力開発）単位への申請も検討。</p>
+      </div>
+    </div>
+    <div class="target-row">
+      <div class="target-badge" style="background:#E1F5EE;color:#0F6E56">最優先</div>
+      <div>
+        <h4 style="margin:0 0 3px">よろず支援拠点（全国47都道府県）</h4>
+        <p style="font-size:12px;margin:0">コーディネーターに診断士が多く在籍。「支援ツールとしてのビズクリ」を紹介するセミナーを共同開催。採択後の経営計画支援ツールとして位置づけることで、経営者への流入も同時に作れる。</p>
+      </div>
+    </div>
+    <div class="target-row">
+      <div class="target-badge" style="background:#EEEDFE;color:#3C3489">準優先</div>
+      <div>
+        <h4 style="margin:0 0 3px">事業承継・引継ぎ支援センター（全国49拠点）</h4>
+        <p style="font-size:12px;margin:0">承継・改革層（最優先ターゲット）が集まる機関。センターのコーディネーターにビズクリを知ってもらい、「承継直後の経営の型づくり」として推奨してもらう流れを作る。</p>
+      </div>
+    </div>
+    <div class="target-row">
+      <div class="target-badge" style="background:#EEEDFE;color:#3C3489">準優先</div>
+      <div>
+        <h4 style="margin:0 0 3px">診断士養成機関（TBC・TAC・LEC等）</h4>
+        <p style="font-size:12px;margin:0">合格者・登録直後の診断士に接触できる唯一に近いルート。「診断士として活動を始めるための実践ツール」として体験セミナーを案内する場を作る。養成校のコンテンツとの連携も検討。</p>
+      </div>
+    </div>
+    <div class="target-row">
+      <div class="target-badge" style="background:#FAEEDA;color:#633806">中期</div>
+      <div>
+        <h4 style="margin:0 0 3px">商工会議所・商工会（全国2,000拠点以上）</h4>
+        <p style="font-size:12px;margin:0">中小企業経営者への直接接触ではなく、経営指導員（多くが診断士資格保有）へのアプローチが主目的。会議所経由での診断士→ビズクリルートを確立する。</p>
+      </div>
+    </div>
+
+    <div class="highlight-a">
+      <strong>外部連携の進め方（段階的アプローチ）</strong><br>
+      ① まず「1機関×1事例」を作ることだけを目指す。大きな協定より、小さな成功事例の方が次の展開を作りやすい<br>
+      ② よろず支援拠点のコーディネーター1名にビズクリを使ってもらい、支援成果が出たら事例として発信する<br>
+      ③ その事例を持って「他機関でも同じことができます」という横展開をする<br>
+      ④ 大阪（BCC本社の地盤）から始め、実績を作ってから全国展開する
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== 実行ロードマップ ===== -->
+<div class="section">
+  <div class="sec-header">
+    <div class="sec-num sn-g">RM</div>
+    <div class="sec-header-text">
+      <h2>実行ロードマップ：90日間の優先順序</h2>
+      <p>「今すぐできること」と「仕込みが必要なこと」を分けて動く</p>
+    </div>
+  </div>
+  <div class="sec-body">
+
+    <h3>Phase 1（今すぐ〜4週目）：道具を整える</h3>
+    <div class="roadmap-row"><div class="rm-phase rm-g">Week 1-2</div><div class="rm-content"><strong>紹介パッケージ制作</strong>：ワンシート・デモ動画・FAQ・個別紹介URLの仕組みを整備。既存サポーター5名にレビューを依頼し、「実際に使えるか」を確認する</div></div>
+    <div class="roadmap-row"><div class="rm-phase rm-g">Week 2-3</div><div class="rm-content"><strong>紹介報酬の制度設計と規約整備</strong>：継続シェア型の仕組みをシステムに組み込む。個別URL発行・転換追跡の仕組みを確認</div></div>
+    <div class="roadmap-row"><div class="rm-phase rm-g">Week 3-4</div><div class="rm-content"><strong>既存サポーター全員への個別連絡</strong>：パッケージを届け、「今のサポーター活動でどんな障壁があるか」を直接ヒアリングする。この声が次のフェーズの設計に直接使える</div></div>
+
+    <div class="divider"></div>
+
+    <h3>Phase 2（1〜2ヶ月目）：活性化させる</h3>
+    <div class="roadmap-row"><div class="rm-phase rm-p">5〜6週目</div><div class="rm-content"><strong>第1回 事例共有会</strong>（サポーター限定・オンライン）を開催。アクティブなサポーター2名に発表を依頼。Slackグループを同時に開設し、参加者を招待</div></div>
+    <div class="roadmap-row"><div class="rm-phase rm-p">6〜7週目</div><div class="rm-content"><strong>第1回 体験セミナー</strong>（診断士向け・無料・2時間）を開催。既存サポーターに「診断士仲間を誘ってください」と依頼。目標：20名参加</div></div>
+    <div class="roadmap-row"><div class="rm-phase rm-p">7〜8週目</div><div class="rm-content"><strong>第1回 合同セミナー</strong>（経営者向け・サポーター登壇）を開催。テーマ：「事業承継した経営者のための経営の型づくり」。目標：経営者30名・トライアル登録10名</div></div>
+
+    <div class="divider"></div>
+
+    <h3>Phase 3（3ヶ月目〜）：外部連携・拡大</h3>
+    <div class="roadmap-row"><div class="rm-phase rm-a">9週目〜</div><div class="rm-content"><strong>よろず支援拠点へのアプローチ開始</strong>。まず大阪拠点のコーディネーターに個別でアプローチし、体験セミナーへの参加を促す。1名がサポーターになれば、そこを起点に横展開</div></div>
+    <div class="roadmap-row"><div class="rm-phase rm-a">10週目〜</div><div class="rm-content"><strong>診断士協会・研究会へのアプローチ</strong>。支部の勉強会に「ビズクリメソッド紹介」として登壇できる機会を打診。CPD単位申請の可能性を探る</div></div>
+    <div class="roadmap-row"><div class="rm-phase rm-a">12週目〜</div><div class="rm-content"><strong>成果のレビューと設計改善</strong>。診断士経由の顧客転換数・継続率・報酬受取サポーター数を分析し、インセンティブ設計と紹介パッケージを改善する</div></div>
+
+    <div class="divider"></div>
+
+    <h3>KPI目標</h3>
+    <div class="grid3">
+      <div class="kpi-card">
+        <div class="kpi-num">3ヶ月</div>
+        <div class="kpi-lbl">アクティブサポーター数 2倍以上</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-num">月10件+</div>
+        <div class="kpi-lbl">サポーター経由のトライアル登録</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-num">30%以上</div>
+        <div class="kpi-lbl">サポーター経由の有料転換率（目標）</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== 結論 ===== -->
+<div class="cover" style="margin-top:0">
+  <div class="cover-label">設計の核心</div>
+  <div class="cover-title" style="font-size:16px;margin-bottom:.75rem">「講座受講 → 面談 → 認定」という既存フローは、bizcreの強みそのもの</div>
+  <div class="cover-sub">
+    <p>このプロセスがあるから、ビズクリサポーターは「その辺にいる紹介屋」ではなく「ビズクリメソッドを理解した信頼できる支援者」になれます。この品質こそが経営者からの信頼につながり、解約率の低さにつながっています。</p>
+    <p style="margin-top:.6rem">だからこそ、この設計書のすべての施策は「フローを崩さず、フローへの入口を広げ、フローを通った人をもっと輝かせる」ことを目的としています。</p>
+    <p style="margin-top:.6rem">数を増やすことより、<strong style="color:#111">一人のサポーターが「ビズクリとともに活動することが自分のキャリアの誇りになる」と感じてくれること</strong>。それが最も持続可能な拡大の形です。</p>
+  </div>
+</div>
+
+</div>
+</body>
+</html>
