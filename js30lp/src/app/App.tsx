@@ -216,7 +216,12 @@ function Header() {
     return () => window.removeEventListener("scroll", fn);
   }, []);
 
-  const nav = ["ビズクリサポート", "ビズクリクラウド", "相談の流れ", "よくある質問"];
+  const nav = [
+    { label: "専門家サポーター", href: "#supporter" },
+    { label: "ビズクリの特徴", href: "#feature" },
+    { label: "相談の流れ", href: "#flow" },
+    { label: "よくある質問", href: "#faq" },
+  ];
 
   return (
     <header
@@ -255,8 +260,8 @@ function Header() {
         <nav className="hidden lg:flex" style={{ gap: 32, alignItems: "center" }}>
           {nav.map((item) => (
             <a
-              key={item}
-              href="#"
+              key={item.label}
+              href={item.href}
               style={{
                 fontSize: 13,
                 color: "#5a6a80",
@@ -266,7 +271,7 @@ function Header() {
               onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "#1a2340")}
               onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "#5a6a80")}
             >
-              {item}
+              {item.label}
             </a>
           ))}
         </nav>
@@ -315,8 +320,8 @@ function Header() {
         >
           {nav.map((item) => (
             <a
-              key={item}
-              href="#"
+              key={item.label}
+              href={item.href}
               style={{
                 display: "block",
                 fontSize: 14,
@@ -326,7 +331,7 @@ function Header() {
                 borderBottom: "1px solid rgba(30,77,140,0.06)",
               }}
             >
-              {item}
+              {item.label}
             </a>
           ))}
           <button
@@ -406,7 +411,7 @@ function HeroSection() {
                 marginBottom: 24,
               }}
             >
-              IT・DXの課題を、<br className="hidden sm:block" />社内で動かせる「戦略」へ。
+              IT・DXの課題を、戦略で解決する。
             </h1>
 
             <p
@@ -472,7 +477,7 @@ function HeroSection() {
                   t.style.borderColor = "#c5d5e8";
                 }}
               >
-                相談の流れを見る
+                <a href="#flow" style={{ color: "inherit", textDecoration: "none" }}>相談の流れを見る</a>
               </button>
             </div>
 
@@ -906,6 +911,7 @@ function FeatureSection() {
 
   return (
     <section
+      id="feature"
       style={{
         padding: "clamp(4rem, 9vw, 7rem) 0",
         background: "#f2f6fb",
@@ -1013,6 +1019,7 @@ function SupporterSection() {
 
   return (
     <section
+      id="supporter"
       style={{
         padding: "clamp(4rem, 9vw, 7rem) 0",
         background: "#fff",
@@ -1596,6 +1603,7 @@ function FormSection() {
       [name]: type === "checkbox" ? (e.target as HTMLInputElement).checked : value,
     }));
   };
+
 
   const inputStyle: React.CSSProperties = {
     width: "100%",
