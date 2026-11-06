@@ -125,14 +125,15 @@ b,strong{font-weight:500}
 .feat.rev .vis{order:2;padding:72px var(--gut) 72px 0}.feat.rev .vis .frame{transform:translateX(-6%)}
 .feat .vis .frame.sub{position:absolute;width:52%;left:var(--gut);bottom:56px;transform:none}
 .feat.rev .vis .frame.sub{left:auto;right:var(--gut)}
-.feat .vis.ph{padding:96px var(--gut) 72px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end}
-.person{width:min(100%,440px)}
-.person img{width:100%;filter:grayscale(1) contrast(1.04);mix-blend-mode:multiply}
-.person figcaption{margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}
-.person .role{font-size:12px;letter-spacing:.12em;color:var(--blue)}
-.person .ttl{font-size:13px;color:var(--sub);margin-top:2px}
-.person .nm{font-weight:300;font-size:26px;letter-spacing:.04em;margin-top:10px;line-height:1.4}
-.person .nm span{font-family:var(--en);font-weight:300;font-size:13px;letter-spacing:.1em;color:var(--sub);margin-left:12px}
+.feat .vis.ph{padding:0;position:relative;display:block}
+.person{position:absolute;inset:0;margin:0}
+.person img{width:100%;height:100%;object-fit:cover;object-position:38% 30%;filter:grayscale(1) contrast(1.06)}
+.person::after{content:"";position:absolute;inset:auto 0 0;height:46%;background:linear-gradient(transparent,rgba(10,12,30,.72));pointer-events:none}
+.person figcaption{position:absolute;left:clamp(24px,4vw,56px);bottom:clamp(24px,4vw,56px);right:24px;z-index:1;color:#fff}
+.person .role{font-size:12px;letter-spacing:.14em;opacity:.85}
+.person .ttl{font-size:13px;margin-top:2px;opacity:.85}
+.person .nm{font-weight:300;font-size:30px;letter-spacing:.04em;margin-top:10px;line-height:1.4}
+.person .nm span{font-family:var(--en);font-weight:300;font-size:13px;letter-spacing:.12em;margin-left:14px;opacity:.85}
 .feat .txt{padding:clamp(72px,8vw,120px) clamp(28px,6vw,96px);display:flex;flex-direction:column;justify-content:center}
 .feat .fn{display:flex;align-items:baseline;gap:18px}
 .feat .fn .n{font-family:var(--en);font-weight:200;font-size:88px;line-height:.9;letter-spacing:-.05em;color:var(--blue)}
@@ -280,7 +281,7 @@ b,strong{font-weight:500}
   .split .hd2{position:static}
   .feat{grid-template-columns:1fr;min-height:0}
   .feat .vis,.feat.rev .vis{order:0;padding:48px var(--gut)}
-  .feat .vis.ph{padding:56px var(--gut) 48px}.person{width:min(100%,260px)}
+  .feat .vis.ph{padding:0;height:min(110vw,520px)}.person .nm{font-size:24px}
   .feat .vis .frame,.feat.rev .vis .frame{width:100%;transform:none}
   .feat .vis .frame.sub,.feat.rev .vis .frame.sub{position:relative;width:70%;left:auto;right:auto;bottom:auto;margin:-40px 0 0 auto}
   .trio,.tools,.roles,.pgrid{grid-template-columns:1fr}
@@ -310,7 +311,7 @@ b,strong{font-weight:500}
 <body>
 
 <!-- 新規登録のURL（ここ1か所を直せば全ボタンに反映） -->
-<script>window.BIZCRE_SIGNUP_URL="https://suite.bizcre.cloud/";</script>
+<script>window.BIZCRE_SIGNUP_URL="https://suite.bizcre.cloud/register";</script>
 
 <header class="hd" id="hd"><div class="in">
   <a class="logo" href="#top" aria-label="bizcre CLOUD"><img src="img/logo_navy.svg" alt="bizcre"><span>CLOUD</span></a>
