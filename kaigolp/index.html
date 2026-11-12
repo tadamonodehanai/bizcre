@@ -386,6 +386,10 @@ b,strong{font-weight:500}
 .k-endfig{position:absolute;right:clamp(20px,4vw,64px);top:-24px;height:clamp(170px,17vw,250px);width:auto;pointer-events:none}
 @media (max-width:900px){.end .wrap{display:flex;flex-direction:column}.end .wrap>*{order:0}.end .wrap>.k-endfig{order:1;position:static;align-self:flex-end;height:140px;margin:28px 0 0}.end .wrap>.go{order:2}}
 @media (max-width:600px){.k-fig{height:120px;margin-top:28px}}
+.k-flowhd{align-items:stretch}
+.k-flowr{display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;gap:28px}
+.k-flowr .k-fig{margin-top:0;align-self:flex-end}
+@media (max-width:900px){.k-flowr .k-fig{align-self:flex-start}}
 </style>
 </head>
 <body>
@@ -499,7 +503,7 @@ b,strong{font-weight:500}
 
 <!-- 流れ -->
 <section class="sec gridbg" id="flow"><div class="wrap">
-  <div class="split" style="align-items:end"><div class="rv"><p class="disp">Flow</p><h2 class="h2" style="margin-top:26px">お申し込みから<br>相談まで</h2><img class="k-fig" src="img/illust_flower.svg" alt="" width="286" height="349" loading="lazy"></div><p class="lead rv">お申し込みのあと、ビズクリ事務局から日程調整のご連絡をします。相談はオンライン会議で行います。</p></div>
+  <div class="split k-flowhd"><div class="rv"><p class="disp">Flow</p><h2 class="h2" style="margin-top:26px">お申し込みから<br>相談まで</h2></div><div class="k-flowr rv"><img class="k-fig" src="img/illust_flower.svg" alt="" width="286" height="349" loading="lazy"><p class="lead">お申し込みのあと、ビズクリ事務局から日程調整のご連絡をします。相談はオンライン会議で行います。</p></div></div>
   <div class="k-flow">
     <div class="rv"><span class="en">01</span><b>フォームから申し込む</b><p>ご相談したい内容を、分かる範囲でご記入ください。</p></div>
     <div class="rv d1"><span class="en">02</span><b>日程を決める</b><p>事務局からメールで、候補の日時をご案内します。</p></div>
