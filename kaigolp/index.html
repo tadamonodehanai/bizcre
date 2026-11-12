@@ -332,8 +332,8 @@ b,strong{font-weight:500}
 }
 
 /* ───── 介護LP用の追加 ───── */
-.k-hero{padding-bottom:clamp(80px,9vw,120px)}
-.k-hero::after{height:120px}
+.k-hero{padding-bottom:0}
+.k-hero::after{display:none}
 .k-facts{display:grid;grid-template-columns:repeat(3,1fr);margin-top:88px;border-top:1px solid var(--ink);position:relative;z-index:1;background:rgba(255,255,255,.7);backdrop-filter:blur(4px)}
 .k-facts > div{padding:30px 32px 6px 0}
 .k-facts > div + div{padding-left:32px;border-left:1px solid var(--line)}
@@ -374,6 +374,13 @@ b,strong{font-weight:500}
 .hd .logo span,.hd .btn-sm{white-space:nowrap}
 @media (max-width:600px){.hd .logo span{display:none}}
 @media (max-width:600px){.k-themes{grid-template-columns:1fr}.k-themes .tool:nth-child(2n){padding-left:0;border-left:0}.k-four{grid-template-columns:1fr}.k-four > div + div{padding-left:0;border-left:0;border-top:1px solid rgba(255,255,255,.4)}.k-cases article{padding:26px 22px}}
+
+/* イラスト */
+.k-people{position:relative;margin-top:clamp(56px,7vw,96px);overflow:hidden;background:linear-gradient(transparent 70%,#fff)}
+.k-people img{display:block;width:min(100%,1320px);height:auto;margin:0 auto -1px;position:relative;z-index:1}
+.k-people::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--blue);opacity:.35}
+.k-bench{display:block;width:clamp(160px,18vw,230px);height:auto;margin-top:40px}
+@media (max-width:600px){.k-people img{width:170%;max-width:none;margin-left:-35%}.k-bench{width:150px;margin-top:28px}}
 </style>
 </head>
 <body>
@@ -409,6 +416,7 @@ b,strong{font-weight:500}
       <div><span class="en">03</span><b>オンラインで30分</b><p>ご都合のよい日時に、パソコンやタブレットから。途中までの下書きでも大丈夫です。</p></div>
     </div>
   </div>
+  <div class="k-people rv"><img src="img/illust_people.svg" alt="" width="2939" height="448"></div>
 </section>
 
 <!-- よくある悩み -->
@@ -440,7 +448,7 @@ b,strong{font-weight:500}
 
 <!-- 相談でできること -->
 <section class="sec" id="talk"><div class="wrap split">
-  <div class="hd2 rv"><p class="disp">Talk</p><h2 class="h2">30分の無料相談で<br>できること</h2><p class="lead" style="margin-top:22px">理事長・代表・施設長・事務長など、法人の計画に関わる方のご相談をお受けしています。</p></div>
+  <div class="hd2 rv"><p class="disp">Talk</p><h2 class="h2">30分の無料相談で<br>できること</h2><p class="lead" style="margin-top:22px">理事長・代表・施設長・事務長など、法人の計画に関わる方のご相談をお受けしています。</p><img class="k-bench" src="img/illust_bench.svg" alt="" width="358" height="329" loading="lazy"></div>
   <div>
     <div class="rows">
       <div class="row rv"><span class="no">01</span><div><h3>いまの計画と、法人の課題を整理する</h3><p>計画書や数字を見ながら、どこで計画と現場が離れているかを一緒に確かめます。</p></div></div>
