@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>介護・医療の経営者向け 30分無料相談｜bizcre SUPPORT</title>
+<meta name="description" content="毎年つくる事業計画が、提出のための書類になっていませんか。理念・ビジョン・経営戦略・計画の4つの段階で、来年度の計画を一緒に整理します。介護事業者の支援経験がある認定ビズクリサポーターが、オンラインで30分、無料でお話を伺います。">
+<meta property="og:title" content="その事業計画、職員は語れますか。｜介護・医療の経営者向け 30分無料相談">
+<meta property="og:description" content="理念から計画までの4つの段階で、来年度の事業計画を一緒に整理します。オンライン・30分・無料。">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#292E88">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=Poppins:wght@200;300;400;500&display=swap" rel="stylesheet">
+<!-- GA4：測定IDを入れて有効化（bizcre.cloud と同じIDを使う）
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
+-->
+<style>
+/* ───────── トークン ───────── */
+:root{
+  --blue:#292E88;      /* ロゴの紺。面と強調に */
+  --navy:#1B1E62;      /* ホバーなど、さらに深い紺 */
+  --ink:#141414; --sub:#5C5C66; --mute:#9A9AA5;
+  --line:#E2E4EB; --paper:#F4F5F8; --white:#fff;
+  --grid:rgba(41,46,136,.09);
+  --wrap:1200px; --gut:clamp(20px,4vw,48px);
+  --en:"Poppins",sans-serif;
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{font-family:"Noto Sans JP",sans-serif;font-weight:400;font-size:15px;line-height:1.95;color:var(--ink);background:var(--white);font-feature-settings:"palt" 1;letter-spacing:.02em;-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(var(--wrap),100% - var(--gut)*2);margin-inline:auto}
+.en{font-family:var(--en)}
+section{position:relative}
+.sec{padding:clamp(96px,12vw,168px) 0}
+
+/* ───────── 文字の階層（細く、ジャンプ率は大きく） ───────── */
+.disp{font-family:var(--en);font-weight:200;font-size:clamp(64px,10vw,152px);line-height:.92;letter-spacing:-.045em;color:var(--blue)}
+.lab{font-family:var(--en);font-weight:400;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--sub);display:flex;align-items:center;gap:10px}
+.lab i{width:6px;height:6px;border-radius:50%;background:var(--blue)}
+.h2{font-weight:300;font-size:clamp(28px,3.6vw,46px);line-height:1.5;letter-spacing:-.01em}
+.lead{font-size:16px;line-height:2.1;color:var(--sub);max-width:640px}
+.small{font-size:13px;line-height:1.9;color:var(--sub)}
+b,strong{font-weight:500}
+
+/* ───────── ボタン ───────── */
+.btn{display:inline-flex;align-items:center;gap:14px;height:56px;padding:0 28px;border-radius:999px;font-size:14px;font-weight:400;letter-spacing:.06em;transition:background .3s var(--ease),color .3s var(--ease),border-color .3s}
+.ar{display:inline-block;width:18px;height:1px;background:currentColor;position:relative;transition:width .3s var(--ease)}
+.ar::after{content:"";position:absolute;right:0;top:-3px;width:7px;height:7px;border-top:1px solid currentColor;border-right:1px solid currentColor;transform:rotate(45deg)}
+.btn:hover .ar,.tlink:hover .ar{width:26px}
+.btn-p{background:var(--blue);color:#fff}.btn-p:hover{background:var(--navy)}
+.btn-o{border:1px solid currentColor}.btn-o:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.btn-sm{height:40px;padding:0 20px;font-size:13px}
+.tlink{display:inline-flex;align-items:center;gap:12px;font-size:14px;border-bottom:1px solid currentColor;padding-bottom:4px}
+
+/* ───────── ヘッダー ───────── */
+.hd{position:fixed;inset:0 0 auto;z-index:50;height:72px;display:flex;align-items:center;transition:background .4s,backdrop-filter .4s}
+.hd .in{display:flex;align-items:center;justify-content:space-between;width:100%;padding:0 var(--gut)}
+.hd .logo{display:flex;align-items:center;gap:10px}
+.hd .logo img{height:22px}
+.hd .logo span{font-family:var(--en);font-weight:300;font-size:18px;letter-spacing:.04em;color:var(--navy)}
+.hd nav{display:flex;align-items:center;gap:30px;font-size:13px;letter-spacing:.06em}
+.hd nav a.t{color:var(--sub);transition:color .2s}.hd nav a.t:hover{color:var(--ink)}
+.hd.on{background:rgba(255,255,255,.82);backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line)}
+
+/* ───────── ヒーロー（方眼の上に、細い大きな文字） ───────── */
+.hero{padding:150px 0 0;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:56px 56px;background-position:center top;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:auto 0 0;height:240px;background:linear-gradient(transparent,#fff 80%);pointer-events:none}
+.hero .news{display:inline-flex;gap:14px;align-items:center;background:rgba(244,245,248,.8);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:999px;padding:6px 18px 6px 6px;font-size:13px;max-width:100%}
+.hero .news b{font-family:var(--en);font-weight:500;font-size:11px;letter-spacing:.1em;background:var(--blue);color:#fff;border-radius:999px;padding:3px 12px}
+.hero h1{font-weight:300;font-size:clamp(40px,6.4vw,92px);line-height:1.28;letter-spacing:-.035em;margin-top:40px}
+.hero h1 .s{font-size:.5em;letter-spacing:0;margin:0 .2em;vertical-align:.18em;color:var(--sub)}
+.hero h1 em{font-style:normal;color:var(--blue)}
+.hero .copy{display:grid;grid-template-columns:minmax(0,560px) 1fr;gap:48px;margin-top:48px;align-items:end}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:26px;align-items:center;margin-top:34px}
+.hero .note{font-size:12px;color:var(--mute);margin-top:16px;letter-spacing:.04em}
+.ring{width:156px;height:156px;position:relative;flex:none;justify-self:end}
+.ring svg{width:100%;height:100%;animation:spin 28s linear infinite}
+.ring .c{position:absolute;inset:0;display:grid;place-items:center;text-align:center;font-family:var(--en);font-weight:200;font-size:46px;color:var(--blue);line-height:1}
+.ring .c small{display:block;font-family:"Noto Sans JP";font-size:11px;font-weight:400;color:var(--sub);margin-top:6px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hero .stage{position:relative;margin-top:84px;z-index:1}
+.frame{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 40px 80px -48px rgba(20,24,60,.35)}
+.frame .bar{height:34px;display:flex;align-items:center;gap:7px;padding:0 16px;border-bottom:1px solid var(--line)}
+.frame .bar i{width:9px;height:9px;border-radius:50%;background:var(--line)}
+.frame .bar span{margin-left:10px;font-family:var(--en);font-size:11px;color:var(--mute);letter-spacing:.04em}
+.hero .stage .frame{width:min(1040px,100%);margin-inline:auto}
+.chip{position:absolute;background:rgba(255,255,255,.88);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:14px;padding:14px 20px;font-size:13px;line-height:1.6;z-index:2}
+.chip .k{font-family:var(--en);font-size:11px;letter-spacing:.12em;color:var(--blue);display:block}
+.chip.c1{left:0;top:48%}.chip.c2{right:0;top:58%}
+
+/* ───────── 左に見出し、右に中身 ───────── */
+.split{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:clamp(40px,6vw,96px)}
+.split .hd2{position:sticky;top:110px;align-self:start}
+.split .hd2 .h2,.split .h2{margin-top:26px;font-size:clamp(24px,2.5vw,34px);line-height:1.6;word-break:keep-all;overflow-wrap:anywhere}
+.rows{border-top:1px solid var(--ink)}
+.row{display:grid;grid-template-columns:72px 1fr;gap:20px;padding:34px 0;border-bottom:1px solid var(--line)}
+.row .no{font-family:var(--en);font-weight:200;font-size:34px;line-height:1;color:var(--blue);letter-spacing:-.03em}
+.row h3{font-weight:400;font-size:21px;line-height:1.6}
+.row p{margin-top:10px;color:var(--sub)}
+.after{margin-top:56px;font-weight:300;font-size:clamp(22px,2.4vw,30px);line-height:1.7}
+.after em{font-style:normal;color:var(--blue)}
+
+/* ───────── 青い面 ───────── */
+.blue{background:var(--blue);color:#fff}
+.blue .lab{color:rgba(255,255,255,.75)}.blue .lab i{background:#fff}
+.blue .disp{color:#fff}
+.blue .lead{color:rgba(255,255,255,.85)}
+.trio{display:grid;grid-template-columns:repeat(3,1fr);margin-top:88px;border-top:1px solid rgba(255,255,255,.4)}
+.trio > div{padding:40px 36px 8px 0}
+.trio > div + div{padding-left:36px;border-left:1px solid rgba(255,255,255,.4)}
+.trio .n{font-family:var(--en);font-weight:200;font-size:64px;line-height:1;letter-spacing:-.04em}
+.trio .r{font-family:var(--en);font-size:11px;letter-spacing:.14em;margin-top:26px;opacity:.75}
+.trio h3{font-weight:300;font-size:28px;line-height:1.5;margin-top:6px}
+.trio p{margin-top:14px;color:rgba(255,255,255,.85)}
+
+/* ───────── 機能（半分を画面、半分を文） ───────── */
+.feat{display:grid;grid-template-columns:1fr 1fr;min-height:760px;border-top:1px solid var(--line)}
+.feat .vis{background:var(--paper);display:grid;place-items:center;padding:72px 0 72px var(--gut);overflow:hidden;position:relative}
+.feat .vis .frame{width:118%;max-width:none;transform:translateX(6%)}
+.feat.rev .vis{order:2;padding:72px var(--gut) 72px 0}.feat.rev .vis .frame{transform:translateX(-6%)}
+.feat .vis .frame.sub{position:absolute;width:52%;left:var(--gut);bottom:56px;transform:none}
+.feat.rev .vis .frame.sub{left:auto;right:var(--gut)}
+.feat .vis.ph{padding:0;position:relative;display:block}
+.person{position:absolute;inset:0;margin:0}
+.person img{width:100%;height:100%;object-fit:cover;object-position:38% 30%;filter:grayscale(1) contrast(1.06)}
+.person::after{content:"";position:absolute;inset:auto 0 0;height:46%;background:linear-gradient(transparent,rgba(10,12,30,.72));pointer-events:none}
+.person figcaption{position:absolute;left:clamp(24px,4vw,56px);bottom:clamp(24px,4vw,56px);right:24px;z-index:1;color:#fff}
+.person .role{font-size:12px;letter-spacing:.14em;opacity:.85}
+.person .ttl{font-size:13px;margin-top:2px;opacity:.85}
+.person .nm{font-weight:300;font-size:30px;letter-spacing:.04em;margin-top:10px;line-height:1.4}
+.person .nm span{font-family:var(--en);font-weight:300;font-size:13px;letter-spacing:.12em;margin-left:14px;opacity:.85}
+.feat .txt{padding:clamp(72px,8vw,120px) clamp(28px,6vw,96px);display:flex;flex-direction:column;justify-content:center}
+.feat .fn{display:flex;align-items:baseline;gap:18px}
+.feat .fn .n{font-family:var(--en);font-weight:200;font-size:88px;line-height:.9;letter-spacing:-.05em;color:var(--blue)}
+.feat .fn .s{font-size:13px;color:var(--sub);letter-spacing:.08em}
+.feat h3{font-weight:300;font-size:clamp(30px,3.2vw,44px);line-height:1.4;letter-spacing:-.02em;margin-top:22px}
+.feat .desc{margin-top:22px;color:var(--sub)}
+.dash{list-style:none;margin-top:30px;border-top:1px solid var(--line)}
+.dash li{padding:15px 0 15px 30px;border-bottom:1px solid var(--line);position:relative;font-size:14.5px;line-height:1.8}
+.dash li::before{content:"";position:absolute;left:0;top:28px;width:16px;height:1px;background:var(--blue)}
+.point{margin-top:34px;padding-left:22px;border-left:1px solid var(--blue)}
+.point .k{font-family:var(--en);font-size:11px;letter-spacing:.16em;color:var(--blue)}
+.point b{display:block;font-weight:400;font-size:18px;margin-top:4px}
+.point p{margin-top:6px;font-size:14px;color:var(--sub)}
+
+/* ───────── 主な機能 ───────── */
+.tools{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--ink)}
+.tool{padding:36px 32px 40px 0;border-bottom:1px solid var(--line)}
+.tool:not(:nth-child(3n+1)){padding-left:32px;border-left:1px solid var(--line)}
+.tool .ic{width:36px;height:36px;color:var(--blue)}
+.tool h3{font-weight:400;font-size:18px;margin-top:22px}
+.tool p{margin-top:8px;font-size:14px;color:var(--sub)}
+.roles{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:56px}
+.roles div{background:var(--paper);border-radius:18px;padding:28px 30px}
+.roles .tg{font-family:var(--en);font-size:11px;letter-spacing:.12em;color:var(--blue)}
+.roles b{display:block;font-weight:400;font-size:20px;margin-top:4px}
+.roles p{font-size:13.5px;color:var(--sub);margin-top:6px}
+
+/* ───────── フレームワーク（番号つきの行） ───────── */
+.phase + .phase{margin-top:64px}
+.phase .ph2{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding-bottom:18px;border-bottom:1px solid var(--ink)}
+.phase .ph2 b{font-weight:300;font-size:26px}
+.phase .ph2 span{font-family:var(--en);font-size:12px;letter-spacing:.14em;color:var(--sub);white-space:nowrap}
+.fw{display:grid;grid-template-columns:72px 220px 1fr;gap:16px;padding:22px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.fw .no{font-family:var(--en);font-weight:300;font-size:14px;color:var(--blue);letter-spacing:.06em}
+.fw b{font-weight:400;font-size:18px}
+.fw span{font-size:14px;color:var(--sub)}
+.chain{margin-top:72px;padding:40px;border-radius:22px;background:#fff}
+.chain .t{font-weight:300;font-size:24px}
+.chain .t small{display:block;font-size:13px;color:var(--sub);margin-top:4px}
+.flows{display:grid;gap:14px;margin-top:26px}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:10px;font-size:14px}
+.flow span{background:var(--paper);border-radius:999px;padding:6px 18px}
+.flow .ar{color:var(--blue);width:26px}
+
+/* ───────── 比較 ───────── */
+.cmp{width:100%;border-collapse:collapse}
+.cmp th,.cmp td{padding:26px 16px;text-align:left;border-bottom:1px solid var(--line);font-weight:400;font-size:15px;vertical-align:top}
+.cmp thead th{font-family:var(--en);font-size:12px;letter-spacing:.1em;color:var(--sub);border-bottom:1px solid var(--ink);padding-top:0}
+.cmp thead th.us{color:var(--blue)}
+.cmp tbody th{color:var(--sub);font-size:14px;width:22%}
+.cmp td.us{color:var(--blue)}
+.cmp td.x{color:var(--mute)}
+
+/* ───────── 専門家（方眼の上に黒いカード） ───────── */
+.gridbg{background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:56px 56px}
+.pro{background:var(--ink);color:#fff;border-radius:32px;padding:clamp(40px,6vw,96px);overflow:hidden;position:relative}
+.pro .lab{color:rgba(255,255,255,.6)}.pro .lab i{background:var(--blue)}
+.pro .top{display:grid;grid-template-columns:1fr auto;gap:48px;align-items:end}
+.pro .disp{color:#fff;font-size:clamp(56px,7.5vw,112px)}
+.pro .lead{color:rgba(255,255,255,.72);margin-top:22px}
+.pro .price{text-align:right}
+.pro .price .p{font-family:var(--en);font-weight:200;font-size:clamp(56px,6vw,84px);line-height:1;letter-spacing:-.04em}
+.pro .price .p small{font-family:"Noto Sans JP";font-size:15px;font-weight:300;letter-spacing:0;margin-left:6px}
+.pro .price .s{font-size:12px;color:rgba(255,255,255,.6);margin-top:8px}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.14);margin-top:72px;border-radius:20px;overflow:hidden}
+.pf{background:var(--ink);display:flex;flex-direction:column}
+.pf .img{aspect-ratio:16/10;overflow:hidden;background:#222}
+.pf .img img{width:100%;height:100%;object-fit:cover;object-position:top left;opacity:.92;transition:transform .8s var(--ease),opacity .4s}
+.pf:hover .img img{transform:scale(1.04);opacity:1}
+.pf .b{padding:26px 28px 32px}
+.pf .k{font-family:var(--en);font-size:11px;letter-spacing:.14em;color:#A9ADEB}
+.pf h3{font-weight:300;font-size:19px;line-height:1.6;margin-top:6px}
+.pf p{font-size:13.5px;color:rgba(255,255,255,.66);margin-top:8px}
+.pf .ill{display:grid;place-items:center;height:100%;background:linear-gradient(135deg,#1c1c22,#262a44)}
+.pro .ctas{display:flex;gap:26px;align-items:center;flex-wrap:wrap;margin-top:56px}
+.pro .ctas .tlink{color:rgba(255,255,255,.8)}
+.pro .note{font-size:12px;color:rgba(255,255,255,.5);margin-top:18px}
+
+/* ───────── 料金 ───────── */
+.toggle{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:4px}
+.toggle button{border:0;background:none;font:inherit;font-size:13px;letter-spacing:.06em;padding:9px 24px;border-radius:999px;cursor:pointer;color:var(--sub)}
+.toggle button.on{background:var(--ink);color:#fff}
+.toggle small{font-size:11px;color:var(--blue);margin-left:6px}
+.toggle button.on small{color:#A9ADEB}
+.plans{display:grid;grid-template-columns:repeat(4,1fr);margin-top:56px;border-top:1px solid var(--ink)}
+.plan{padding:36px 28px 40px;display:flex;flex-direction:column;border-bottom:1px solid var(--line);position:relative}
+.plan + .plan{border-left:1px solid var(--line)}
+.plan .nm{font-weight:400;font-size:20px}
+.plan .rb{position:absolute;top:42px;right:24px;font-family:var(--en);font-size:10px;letter-spacing:.14em;color:var(--blue)}
+.plan .for{font-size:12.5px;color:var(--sub);margin-top:2px}
+.plan .pr{font-family:var(--en);font-weight:200;font-size:56px;line-height:1;letter-spacing:-.04em;margin-top:30px}
+.plan .pr small{font-family:"Noto Sans JP";font-size:13px;font-weight:400;letter-spacing:0;margin-left:4px}
+.plan .tx{font-size:12px;color:var(--mute);margin-top:6px;min-height:18px}
+.plan ul{list-style:none;margin:28px 0 32px;flex:1}
+.plan li{font-size:13.5px;padding:9px 0 9px 22px;position:relative;line-height:1.7;border-top:1px solid var(--line)}
+.plan li::before{content:"";position:absolute;left:0;top:21px;width:10px;height:1px;background:var(--blue)}
+.plan .btn{justify-content:space-between;width:100%}
+.plan.dark{background:var(--ink);color:#fff;border-radius:0 0 18px 18px}
+.plan.dark .for,.plan.dark .tx{color:rgba(255,255,255,.6)}
+.plan.dark li{border-color:rgba(255,255,255,.14)}
+.plan.dark .btn-o{color:#fff}.plan.dark .btn-o:hover{background:#fff;color:var(--ink);border-color:#fff}
+.pnotes{margin-top:30px;display:grid;gap:4px}
+
+/* ───────── FAQ ───────── */
+.faq{border-top:1px solid var(--ink)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:48px 1fr 24px;gap:12px;align-items:center;padding:28px 0;font-weight:400;font-size:17px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::before{content:"Q";font-family:var(--en);font-weight:200;font-size:28px;color:var(--blue);line-height:1}
+.faq summary .pm{width:20px;height:20px;position:relative}
+.faq summary .pm::before,.faq summary .pm::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:var(--ink);transition:transform .3s var(--ease)}
+.faq summary .pm::after{transform:rotate(90deg)}
+.faq details[open] .pm::after{transform:rotate(0)}
+.faq .a{padding:0 36px 30px 60px;color:var(--sub)}
+
+/* ───────── 最後（青い面、3つの行き先、大きなロゴ） ───────── */
+.end{padding:clamp(110px,13vw,180px) 0 0;overflow:hidden}
+.end h2{font-weight:300;font-size:clamp(36px,5.6vw,80px);line-height:1.35;letter-spacing:-.035em}
+.end .lead{margin-top:34px;max-width:none}
+.go{margin-top:96px;border-top:1px solid rgba(255,255,255,.4)}
+.go a{display:grid;grid-template-columns:1fr 1.4fr auto;gap:32px;align-items:center;padding:34px 0;border-bottom:1px solid rgba(255,255,255,.4);transition:padding .4s var(--ease)}
+.go a:hover{padding-left:16px}
+.go b{font-family:var(--en);font-weight:300;font-size:clamp(22px,2.4vw,30px);letter-spacing:-.01em}
+.go a > span{color:rgba(255,255,255,.85);font-size:14px}
+.go .circ{width:52px;height:52px;border:1px solid rgba(255,255,255,.6);border-radius:50%;display:grid;place-items:center;transition:background .3s,color .3s}
+.go a:hover .circ{background:#fff;color:var(--blue)}
+.ft{padding:72px 0 0}
+.ft .row2{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;font-size:12px;color:rgba(255,255,255,.8)}
+.ft nav{display:flex;gap:26px;flex-wrap:wrap}
+.ft .mark{font-family:var(--en);font-weight:200;font-size:clamp(56px,13.2vw,200px);line-height:.78;letter-spacing:-.06em;margin-top:56px;white-space:nowrap;transform:translateY(.12em)}
+
+/* クーポン（固定カード） */
+.coupon{position:fixed;right:24px;bottom:24px;z-index:55;width:320px;background:var(--ink);color:#fff;border-radius:20px;padding:22px 22px 20px;box-shadow:0 30px 60px -30px rgba(10,12,40,.6);transform:translateY(calc(100% + 40px));opacity:0;transition:transform .6s var(--ease),opacity .4s}
+.coupon.on{transform:none;opacity:1}
+.coupon .x{position:absolute;top:12px;right:12px;width:30px;height:30px;border:0;background:none;color:rgba(255,255,255,.6);cursor:pointer;font-size:0}
+.coupon .x::before,.coupon .x::after{content:"";position:absolute;left:8px;right:8px;top:50%;height:1px;background:currentColor;transform:rotate(45deg)}
+.coupon .x::after{transform:rotate(-45deg)}
+.coupon .x:hover{color:#fff}
+.coupon .k{font-family:var(--en);font-size:11px;letter-spacing:.16em;color:#A9ADEB}
+.coupon .t{display:flex;align-items:baseline;gap:10px;margin-top:6px}
+.coupon .t b{font-family:var(--en);font-weight:200;font-size:56px;line-height:1;letter-spacing:-.04em}
+.coupon .t b small{font-size:24px;letter-spacing:0;margin-left:2px}
+.coupon .t span{font-size:13px;line-height:1.6}
+.coupon .code{display:flex;align-items:center;justify-content:space-between;margin-top:16px;border:1px dashed rgba(255,255,255,.4);border-radius:12px;padding:8px 8px 8px 16px}
+.coupon .code span{font-family:var(--en);font-weight:400;font-size:18px;letter-spacing:.14em}
+.coupon .code button{border:0;background:#fff;color:var(--ink);font:inherit;font-size:12px;letter-spacing:.06em;border-radius:999px;padding:7px 16px;cursor:pointer}
+.coupon .lead2{display:none}
+.coupon .n{font-size:11.5px;line-height:1.75;color:rgba(255,255,255,.65);margin-top:12px}
+
+/* スマホ固定CTA */
+.sp-cta{display:none}
+
+/* ───────── 動き ───────── */
+.rv{opacity:0;transform:translateY(24px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.d1{transition-delay:.12s}.d2{transition-delay:.24s}.d3{transition-delay:.36s}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.ring svg{animation:none}html{scroll-behavior:auto}}
+
+/* ───────── レスポンシブ ───────── */
+@media (max-width:1000px){
+  .hd nav a.t{display:none}
+  .split,.hero .copy,.pro .top{grid-template-columns:minmax(0,1fr)}
+  .split .hd2{position:static}
+  .feat{grid-template-columns:1fr;min-height:0}
+  .feat .vis,.feat.rev .vis{order:0;padding:48px var(--gut)}
+  .feat .vis.ph{padding:0;height:min(110vw,520px)}.person .nm{font-size:24px}
+  .feat .vis .frame,.feat.rev .vis .frame{width:100%;transform:none}
+  .feat .vis .frame.sub,.feat.rev .vis .frame.sub{position:relative;width:70%;left:auto;right:auto;bottom:auto;margin:-40px 0 0 auto}
+  .trio,.tools,.roles,.pgrid{grid-template-columns:1fr}
+  .trio > div + div{padding-left:0;border-left:0;border-top:1px solid rgba(255,255,255,.4)}
+  .tool:not(:nth-child(3n+1)){padding-left:0;border-left:0}
+  .plans{grid-template-columns:1fr 1fr}
+  .plan:nth-child(3){border-left:0}
+  .pro .price{text-align:left}
+  .chip,.ring{display:none}
+  .go a{grid-template-columns:1fr auto}.go a > span{display:none}
+  .sp-cta{display:block;position:fixed;left:12px;right:12px;bottom:12px;z-index:60;transform:translateY(130%);transition:transform .4s var(--ease)}
+  .sp-cta.on{transform:none}
+  .sp-cta .btn{width:100%;justify-content:center}
+  .coupon{left:12px;right:12px;bottom:80px;width:auto;padding:14px 16px;border-radius:16px;display:grid;grid-template-columns:auto 1fr;column-gap:14px;align-items:center}
+  .coupon .k,.coupon .n{display:none}
+  .coupon .t{margin:0;grid-row:1/3}.coupon .t b{font-size:40px}.coupon .t span{display:none}
+  .coupon .lead2{display:block;font-size:12px;line-height:1.5;padding-right:28px}
+  .coupon .code{margin-top:6px;padding:4px 4px 4px 12px}.coupon .code span{font-size:14px}.coupon .code button{padding:5px 12px}
+  .coupon .x{top:6px;right:6px}
+}
+@media (max-width:600px){
+  body{font-size:14.5px}
+  .plans{grid-template-columns:1fr}.plan + .plan{border-left:0}
+  .fw{grid-template-columns:40px minmax(0,1fr);row-gap:2px}.fw .no{grid-row:1/3}.fw b,.fw span{grid-column:2}
+  .phase .ph2 b{font-size:21px}
+  .row{grid-template-columns:52px 1fr}
+  .cmp-wrap{overflow-x:auto}.cmp{min-width:600px}
+  .faq .a{padding-left:0}
+  .phase .ph2{flex-direction:column;gap:4px}
+}
+
+/* ───── 介護LP用の追加 ───── */
+.k-hero{padding-bottom:clamp(80px,9vw,120px)}
+.k-hero::after{height:120px}
+.k-facts{display:grid;grid-template-columns:repeat(3,1fr);margin-top:88px;border-top:1px solid var(--ink);position:relative;z-index:1;background:rgba(255,255,255,.7);backdrop-filter:blur(4px)}
+.k-facts > div{padding:30px 32px 6px 0}
+.k-facts > div + div{padding-left:32px;border-left:1px solid var(--line)}
+.k-facts span{font-weight:200;font-size:30px;color:var(--blue);line-height:1}
+.k-facts b{display:block;font-weight:400;font-size:19px;margin-top:14px}
+.k-facts p{font-size:14px;color:var(--sub);margin-top:8px}
+.k-four{grid-template-columns:repeat(4,1fr)}
+.k-four > div + div{padding-left:28px}
+.k-four > div{padding-right:28px}
+.k-bring{margin-top:48px;padding:30px 32px;border-radius:20px;background:var(--paper)}
+.k-bring .k{font-family:var(--en);font-size:11px;letter-spacing:.14em;color:var(--blue)}
+.k-bring .dash{margin-top:14px}
+.k-cases{display:grid;gap:18px}
+.k-cases article{background:#fff;border-radius:22px;padding:34px 36px}
+.k-cases .k{font-family:var(--en);font-size:11px;letter-spacing:.14em;color:var(--blue)}
+.k-cases h3{font-weight:300;font-size:clamp(20px,2vw,24px);line-height:1.55;margin-top:8px}
+.k-cases dl{display:grid;grid-template-columns:52px 1fr;margin-top:18px;border-top:1px solid var(--line)}
+.k-cases dt,.k-cases dd{padding:12px 0;border-bottom:1px solid var(--line);font-size:14px;line-height:1.8}
+.k-cases dt{color:var(--blue)}
+.k-cases dd{color:var(--sub)}
+.k-themes{grid-template-columns:repeat(2,1fr)}.k-themes .tool{padding-bottom:30px}.k-themes .tool:not(:nth-child(3n+1)){padding-left:0;border-left:0}.k-themes .tool:nth-child(2n){padding-left:32px;border-left:1px solid var(--line)}
+.k-themes .k-n{font-weight:200;font-size:28px;color:var(--blue);line-height:1}
+.k-themes h3{margin-top:14px;font-size:17px;line-height:1.6}
+.k-flow{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:64px}
+.k-flow > div{background:#fff;border:1px solid var(--line);border-radius:20px;padding:30px 28px 34px}
+.k-flow span{font-weight:200;font-size:44px;color:var(--blue);line-height:1;letter-spacing:-.03em}
+.k-flow b{display:block;font-weight:400;font-size:18px;margin-top:18px}
+.k-flow p{font-size:14px;color:var(--sub);margin-top:8px}
+.k-guide .top{grid-template-columns:1fr auto}
+.k-guide .h2{color:#fff}
+@media (max-width:1000px){
+  .k-facts,.k-flow{grid-template-columns:1fr}
+  .k-facts > div + div{padding-left:0;border-left:0;border-top:1px solid var(--line)}
+  .k-four{grid-template-columns:1fr 1fr}
+  .k-four > div:nth-child(3){padding-left:0;border-left:0}
+  .k-guide .top{grid-template-columns:1fr}
+}
+.hd .logo span,.hd .btn-sm{white-space:nowrap}
+@media (max-width:600px){.hd .logo span{display:none}}
+@media (max-width:600px){.k-themes{grid-template-columns:1fr}.k-themes .tool:nth-child(2n){padding-left:0;border-left:0}.k-four{grid-template-columns:1fr}.k-four > div + div{padding-left:0;border-left:0;border-top:1px solid rgba(255,255,255,.4)}.k-cases article{padding:26px 22px}}
+</style>
+</head>
+<body>
+<!-- 申込先とリンク（ここを直せば全ボタンに反映） -->
+<script>window.LINKS={apply:"https://bizcre.cloud/support/",guide:"#",cloud:"https://tadamonodehanai.github.io/bizcre/cloudlp/"};</script>
+
+<header class="hd" id="hd"><div class="in">
+  <a class="logo" href="#top" aria-label="bizcre SUPPORT for Care"><img src="img/logo_navy.svg" alt="bizcre"><span>SUPPORT <i style="font-style:normal;font-weight:500">for Care</i></span></a>
+  <nav><a class="t" href="#issue">よくある悩み</a><a class="t" href="#method">考え方</a><a class="t" href="#talk">相談でできること</a><a class="t" href="#flow">流れ</a><a class="t" href="#faq">よくある質問</a>
+    <a class="btn btn-p btn-sm js-apply" data-pos="header" href="#">無料相談を申し込む</a></nav>
+</div></header>
+
+<main id="top">
+<!-- ヒーロー -->
+<section class="hero k-hero">
+  <div class="wrap">
+    <p class="news rv"><b>FOR CARE</b>介護・医療の経営者の皆様へ</p>
+    <h1 class="rv d1">その事業計画、<br>職員は<em>語れます</em>か。</h1>
+    <div class="copy">
+      <div class="rv d2">
+        <p class="lead">毎年つくる事業計画が、提出のための書類になっていませんか。理念・ビジョン・経営戦略・計画の4つの段階で、来年度の計画を一緒に整理します。介護事業者の支援経験がある認定ビズクリサポーターが、オンラインで30分、無料でお話を伺います。</p>
+        <div class="ctas"><a class="btn btn-p js-apply" data-pos="hero" href="#">30分無料相談を申し込む<span class="ar"></span></a><a class="tlink" href="#talk">相談でできること</a></div>
+        <p class="note">オンライン｜30分｜無料。相談のあとに、無理な勧誘はしません。</p>
+      </div>
+      <div class="ring rv d3" aria-hidden="true">
+        <svg viewBox="0 0 156 156"><defs><path id="cp" d="M78,78 m-64,0 a64,64 0 1,1 128,0 a64,64 0 1,1 -128,0"/></defs><text font-family="Poppins" font-size="13.5" fill="#292E88"><textPath href="#cp" textLength="402.1" lengthAdjust="spacing">FREE CONSULTATION · ONLINE · FOR CARE ·&#160;</textPath></text></svg>
+        <div class="c"><div>30<small>分・無料</small></div></div>
+      </div>
+    </div>
+    <div class="k-facts rv">
+      <div><span class="en">01</span><b>介護事業者の支援経験</b><p>財務の立て直しや再建計画、採用、会議運営まで、介護・ヘルスケアの事業者を支援してきたサポーターが対応します。</p></div>
+      <div><span class="en">02</span><b>理念から計画まで</b><p>数字の帳尻合わせではなく、何のための計画かから一緒に考えます。</p></div>
+      <div><span class="en">03</span><b>オンラインで30分</b><p>ご都合のよい日時に、パソコンやタブレットから。途中までの下書きでも大丈夫です。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- よくある悩み -->
+<section class="sec" id="issue"><div class="wrap split">
+  <div class="hd2 rv"><p class="disp">Issue</p><h2 class="h2">計画が<br>「作って終わり」に<br>なっていませんか。</h2></div>
+  <div>
+    <div class="rows">
+      <div class="row rv"><span class="no">01</span><div><h3>前年の数字の延長で作っている</h3><p>稼働率を少し上げ、経費は前年並み。目標の理由が書かれていないと、職員には「もっと頑張れ」としか伝わりません。</p></div></div>
+      <div class="row rv"><span class="no">02</span><div><h3>人材の課題が、計画の外にある</h3><p>採用や定着がいちばんの悩みなのに、計画書では「研修計画」の一行。人の問題が、事業の計画と別の紙に置かれています。</p></div></div>
+      <div class="row rv"><span class="no">03</span><div><h3>報酬改定のたびに、方針が変わる</h3><p>改定のたびにゼロから考え直すと、現場は振り回されます。改定は、方針を決める材料ではなく、進め方を選ぶ材料です。</p></div></div>
+    </div>
+    <p class="after rv">3つに共通するのは、計画の上流にある<br><em>理念とビジョン</em>が、職員と共有されていないことです。</p>
+  </div>
+</div></section>
+
+<!-- 考え方 -->
+<section class="sec blue" id="method"><div class="wrap">
+  <p class="lab rv"><i></i>Method</p>
+  <p class="disp rv" style="margin-top:28px">4 Steps.</p>
+  <h2 class="h2 rv" style="margin-top:48px">理念から計画まで、<br>4つの段階で考える。</h2>
+  <p class="lead rv" style="margin-top:18px">上の段階が決まると、下の段階で迷ったときに立ち返る場所ができます。数字は、最後の段階で決めます。</p>
+  <div class="trio k-four">
+    <div class="rv"><p class="n">01</p><p class="r">PHILOSOPHY</p><h3>理念</h3><p>この法人は、誰のために、何をするのか</p></div>
+    <div class="rv d1"><p class="n">02</p><p class="r">VISION</p><h3>ビジョン</h3><p>5年後に、どんな姿でいたいか</p></div>
+    <div class="rv d2"><p class="n">03</p><p class="r">STRATEGY</p><h3>経営戦略</h3><p>人・サービス・収支の、どこに力を入れるか</p></div>
+    <div class="rv d3"><p class="n">04</p><p class="r">PLAN</p><h3>計画</h3><p>この1年で、誰が何をするか</p></div>
+  </div>
+</div></section>
+
+<!-- 相談でできること -->
+<section class="sec" id="talk"><div class="wrap split">
+  <div class="hd2 rv"><p class="disp">Talk</p><h2 class="h2">30分の無料相談で<br>できること</h2><p class="lead" style="margin-top:22px">理事長・代表・施設長・事務長など、法人の計画に関わる方のご相談をお受けしています。</p></div>
+  <div>
+    <div class="rows">
+      <div class="row rv"><span class="no">01</span><div><h3>いまの計画と、法人の課題を整理する</h3><p>計画書や数字を見ながら、どこで計画と現場が離れているかを一緒に確かめます。</p></div></div>
+      <div class="row rv"><span class="no">02</span><div><h3>理念・ビジョンから見直す</h3><p>開設のときの思いや、職員と利用者の今に照らして、計画の土台を言葉にし直します。</p></div></div>
+      <div class="row rv"><span class="no">03</span><div><h3>来年度の計画づくりの進め方を決める</h3><p>理事会や年度の予定から逆算して、いつ、誰と、何を決めるかを整理します。</p></div></div>
+    </div>
+    <div class="k-bring rv"><p class="k">あると話が早いもの</p><ul class="dash"><li>今年度の事業計画書（途中のものでも）</li><li>「事業計画づくりの手引き（介護版）」で書いた下書き</li><li>いま一番気になっている数字や出来事のメモ</li></ul></div>
+  </div>
+</div></section>
+
+<!-- 支援の現場から -->
+<section class="sec" id="cases" style="background:var(--paper)"><div class="wrap split">
+  <div class="hd2 rv"><p class="disp">Cases</p><h2 class="h2">支援の現場から</h2><p class="lead" style="margin-top:22px">ビズクリサポーターが介護・ヘルスケアの事業者を支援した事例です。事業者が特定されないよう、名称を伏せ、内容を要約しています。</p></div>
+  <div class="k-cases">
+    <article class="rv"><p class="k">DAY SERVICE</p><h3>隣り合う2つのデイサービスで、1年目に経常黒字へ</h3>
+      <dl><dt>状況</dt><dd>稼働率の低迷、人件費の高止まり、経費の高騰。過大な借入の返済にも追われていた</dd>
+      <dt>支援</dt><dd>金融機関に返済条件の見直しを求め、経営再建計画を策定。営業、利用率と単価、経費の施策を積み上げた</dd>
+      <dt>変化</dt><dd>1年目で経常黒字に。いまは2施設をまとめて運営する方法を検討中</dd></dl></article>
+    <article class="rv d1"><p class="k">HOME CARE &amp; NURSING</p><h3>財務の立て直しで、経営判断がしやすくなった</h3>
+      <dl><dt>状況</dt><dd>訪問看護・訪問介護・デイサービスなどを展開。財務の状態が悪化していた</dd>
+      <dt>支援</dt><dd>財務の視点から改善を提案し、金融機関への対応を含めて実行に伴走</dd>
+      <dt>変化</dt><dd>手元の資金が回復し、資金繰りが見えるようになって安定した</dd></dl></article>
+    <article class="rv d2"><p class="k">HEALTHCARE</p><h3>社員を巻き込んだ会議で、債務超過から黒字へ</h3>
+      <dl><dt>状況</dt><dd>ヘルスケア領域の事業者。債務超過の状態にあった</dd>
+      <dt>支援</dt><dd>収益の改善とあわせて、社員を巻き込んだ経営会議・年度方針会議の進め方を指導し、社員教育にも取り組んだ</dd>
+      <dt>変化</dt><dd>債務超過から黒字化し、収益が改善した</dd></dl></article>
+  </div>
+</div></section>
+
+<!-- 担当するサポーター -->
+<section class="sec"><div class="wrap split">
+  <div class="hd2 rv"><p class="disp">People</p><h2 class="h2">介護の現場を知る<br>専門家が担当します。</h2></div>
+  <div>
+    <p class="lead rv" style="max-width:none">中小企業診断士など、約35名の認定ビズクリサポーターの中から、ご相談の内容に合わせて担当を決めます。介護・ヘルスケアの事業者の支援では、次のようなテーマに関わってきました。</p>
+    <div class="tools k-themes" style="margin-top:48px">
+      <div class="tool rv"><span class="en k-n">01</span><h3>財務の立て直しと、金融機関への対応</h3></div>
+      <div class="tool rv d1"><span class="en k-n">02</span><h3>経営再建計画の策定と、実行の伴走</h3></div>
+      <div class="tool rv d2"><span class="en k-n">03</span><h3>現状と課題の整理、集客とスタッフの採用</h3></div>
+      <div class="tool rv"><span class="en k-n">04</span><h3>経営会議・年度方針会議の運営と、社員教育</h3></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 流れ -->
+<section class="sec gridbg" id="flow"><div class="wrap">
+  <div class="split" style="align-items:end"><div class="rv"><p class="disp">Flow</p><h2 class="h2" style="margin-top:26px">お申し込みから<br>相談まで</h2></div><p class="lead rv">お申し込みのあと、ビズクリ事務局から日程調整のご連絡をします。相談はオンライン会議で行います。</p></div>
+  <div class="k-flow">
+    <div class="rv"><span class="en">01</span><b>フォームから申し込む</b><p>ご相談したい内容を、分かる範囲でご記入ください。</p></div>
+    <div class="rv d1"><span class="en">02</span><b>日程を決める</b><p>事務局からメールで、候補の日時をご案内します。</p></div>
+    <div class="rv d2"><span class="en">03</span><b>オンラインで30分</b><p>担当のビズクリサポーターが、お話を伺います。</p></div>
+    <div class="rv d3"><span class="en">04</span><b>次の一歩を選ぶ</b><p>継続の支援が役立つ場合は、内容と費用を事前にご説明します。お申し込みは任意です。</p></div>
+  </div>
+</div></section>
+
+<!-- 手引き -->
+<section style="padding:0 0 clamp(80px,10vw,140px)" class="gridbg"><div class="wrap">
+  <div class="pro k-guide rv">
+    <div class="top">
+      <div><p class="lab"><i></i>Free Guide</p>
+        <h2 class="h2" style="margin-top:22px">まずは自分たちで考えたい方へ。<br>事業計画づくりの手引き（介護版）</h2>
+        <p class="lead">4つの段階ごとの問いと、デイサービスを例にした記入例をまとめた手引きです。下書きを1枚つくってから相談すると、30分を具体的な話に使えます。</p></div>
+      <div class="ctas" style="margin-top:0"><a class="btn btn-p js-guide" data-pos="guide" href="#">手引きをダウンロード<span class="ar"></span></a></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- FAQ -->
+<section class="sec" id="faq" style="padding-top:clamp(40px,6vw,80px)"><div class="wrap split">
+  <div class="hd2 rv"><p class="disp">FAQ</p><h2 class="h2">よくある質問</h2></div>
+  <div class="faq rv">
+    <details><summary>本当に無料ですか？<span class="pm"></span></summary><p class="a">はい。30分の相談は無料です。相談のあとで継続の支援が役立つと考えられる場合は、内容と費用を事前にご説明します。お申し込みは任意で、相談だけで終えていただいても構いません。</p></details>
+    <details><summary>どんな立場の人が相談できますか？<span class="pm"></span></summary><p class="a">理事長・代表・施設長・事務長など、法人や事業所の計画づくりに関わる方のご相談をお受けしています。</p></details>
+    <details><summary>相談はどのように行いますか？<span class="pm"></span></summary><p class="a">オンライン会議で行います。お申し込みのあと、ビズクリ事務局から日程と参加方法をメールでご案内します。</p></details>
+    <details><summary>何を準備すればよいですか？<span class="pm"></span></summary><p class="a">準備がなくてもご相談いただけます。今年度の事業計画書や、手引きで書いた下書き（途中のものでも）があると、30分を具体的な話に使えます。</p></details>
+    <details><summary>計画は、ツールでもまとめられますか？<span class="pm"></span></summary><p class="a">経営支援クラウドの「bizcre CLOUD」で、理念から計画までの答えを1か所にまとめられます。相談したサポーターを招いて、同じ画面を見ながら話すこともできます。</p></details>
+  </div>
+</div></section>
+
+<!-- 最後 -->
+<section class="blue end">
+  <div class="wrap">
+    <h2 class="rv">来年度の計画を、<br>30分だけ外の視点で。</h2>
+    <p class="lead rv">介護事業者の支援経験がある認定ビズクリサポーターが、<br>理念から計画までの整理をお手伝いします。</p>
+    <div class="go">
+      <a class="js-apply rv" data-pos="end_apply" href="#"><b>Free Consultation</b><span>30分無料相談を申し込む。オンラインで対応します。</span><i class="circ"><span class="ar"></span></i></a>
+      <a class="js-guide rv d1" data-pos="end_guide" href="#"><b>Free Guide</b><span>事業計画づくりの手引き（介護版）をダウンロードする。</span><i class="circ"><span class="ar"></span></i></a>
+      <a class="js-cloud rv d2" href="#"><b>bizcre CLOUD</b><span>理念から計画までを、クラウドで1か所にまとめる。</span><i class="circ"><span class="ar"></span></i></a>
+    </div>
+  </div>
+  <footer class="ft"><div class="wrap">
+    <div class="row2"><nav><a href="https://bizcre.cloud/">bizcre</a><a href="https://bizcre.cloud/support/">ビズクリサポート</a><a href="https://bizcre.cloud/contact/">お問い合わせ</a></nav><p>運営：ＢＣＣ株式会社 ビズクリ事務局</p></div>
+    <p class="mark" style="font-size:clamp(48px,11.6vw,176px)">bizcre SUPPORT</p>
+  </div></footer>
+</section>
+</main>
+
+<div class="sp-cta" id="spcta"><a class="btn btn-p js-apply" data-pos="sp_fixed" href="#">30分無料相談を申し込む<span class="ar"></span></a></div>
+
+<script>
+(function(){
+  var hd=document.getElementById('hd'),sp=document.getElementById('spcta');
+  function onScroll(){var y=scrollY;hd.classList.toggle('on',y>30);sp.classList.toggle('on',y>innerHeight*.9&&(innerHeight+y)<document.body.scrollHeight-500);}
+  addEventListener('scroll',onScroll,{passive:true});onScroll();
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
+  // UTMの保存と引き継ぎ（計測設計③）：メールから来たUTMを30日保存し、申込・DLのリンクに付け直す
+  var KEYS=['utm_source','utm_medium','utm_campaign','utm_content','utm_term'],STORE='bizcre_utm',DAYS=30,q=new URLSearchParams(location.search);
+  try{if(q.get('utm_campaign')){var v={t:Date.now()};KEYS.forEach(function(k){v[k]=q.get(k)||'';});localStorage.setItem(STORE,JSON.stringify(v));}}catch(e){}
+  function utm(){try{var v=JSON.parse(localStorage.getItem(STORE)||'null');if(v&&Date.now()-v.t<=DAYS*864e5)return v;}catch(e){}return null;}
+  function link(sel,base,ev){document.querySelectorAll(sel).forEach(function(a){
+    if(!base||base==='#'){a.href='#';return;}
+    var u=new URL(base,location.href),v=utm();
+    if(v){KEYS.forEach(function(k){if(v[k])u.searchParams.set(k,v[k]);});}
+    else{u.searchParams.set('utm_source','bizcre');u.searchParams.set('utm_medium','lp');u.searchParams.set('utm_campaign','kaigo_lp');}
+    a.href=u.toString();
+    a.addEventListener('click',function(){if(window.gtag)gtag('event',ev,{position:a.dataset.pos||''});});
+  });}
+  link('.js-apply',LINKS.apply,'cta_support_click');link('.js-guide',LINKS.guide,'cta_guide_click');link('.js-cloud',LINKS.cloud,'cta_cloud_click');
+})();
+</script>
+</body>
+</html>
