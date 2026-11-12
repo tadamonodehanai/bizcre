@@ -381,6 +381,11 @@ b,strong{font-weight:500}
 .k-people::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--blue);opacity:.35}
 .k-bench{display:block;width:clamp(160px,18vw,230px);height:auto;margin-top:40px}
 @media (max-width:600px){.k-people img{width:170%;max-width:none;margin-left:-35%}.k-bench{width:150px;margin-top:28px}}
+.k-fig{display:block;width:auto;height:clamp(150px,14vw,200px);margin-top:44px}
+.end .wrap{position:relative}
+.k-endfig{position:absolute;right:clamp(20px,4vw,64px);top:-24px;height:clamp(170px,17vw,250px);width:auto;pointer-events:none}
+@media (max-width:900px){.end .wrap{display:flex;flex-direction:column}.end .wrap>*{order:0}.end .wrap>.k-endfig{order:1;position:static;align-self:flex-end;height:140px;margin:28px 0 0}.end .wrap>.go{order:2}}
+@media (max-width:600px){.k-fig{height:120px;margin-top:28px}}
 </style>
 </head>
 <body>
@@ -421,7 +426,7 @@ b,strong{font-weight:500}
 
 <!-- よくある悩み -->
 <section class="sec" id="issue"><div class="wrap split">
-  <div class="hd2 rv"><p class="disp">Issue</p><h2 class="h2">計画が<br>「作って終わり」に<br>なっていませんか。</h2></div>
+  <div class="hd2 rv"><p class="disp">Issue</p><h2 class="h2">計画が<br>「作って終わり」に<br>なっていませんか。</h2><img class="k-fig" src="img/illust_walker.svg" alt="" width="152" height="359" loading="lazy"></div>
   <div>
     <div class="rows">
       <div class="row rv"><span class="no">01</span><div><h3>前年の数字の延長で作っている</h3><p>稼働率を少し上げ、経費は前年並み。目標の理由が書かれていないと、職員には「もっと頑張れ」としか伝わりません。</p></div></div>
@@ -461,7 +466,7 @@ b,strong{font-weight:500}
 
 <!-- 支援の現場から -->
 <section class="sec" id="cases" style="background:var(--paper)"><div class="wrap split">
-  <div class="hd2 rv"><p class="disp">Cases</p><h2 class="h2">支援の現場から</h2><p class="lead" style="margin-top:22px">ビズクリサポーターが介護・ヘルスケアの事業者を支援した事例です。事業者が特定されないよう、名称を伏せ、内容を要約しています。</p></div>
+  <div class="hd2 rv"><p class="disp">Cases</p><h2 class="h2">支援の現場から</h2><p class="lead" style="margin-top:22px">ビズクリサポーターが介護・ヘルスケアの事業者を支援した事例です。事業者が特定されないよう、名称を伏せ、内容を要約しています。</p><img class="k-fig" src="img/illust_care.svg" alt="" width="360" height="357" loading="lazy"></div>
   <div class="k-cases">
     <article class="rv"><p class="k">DAY SERVICE</p><h3>隣り合う2つのデイサービスで、1年目に経常黒字へ</h3>
       <dl><dt>状況</dt><dd>稼働率の低迷、人件費の高止まり、経費の高騰。過大な借入の返済にも追われていた</dd>
@@ -480,7 +485,7 @@ b,strong{font-weight:500}
 
 <!-- 担当するサポーター -->
 <section class="sec"><div class="wrap split">
-  <div class="hd2 rv"><p class="disp">People</p><h2 class="h2">介護の現場を知る<br>専門家が担当します。</h2></div>
+  <div class="hd2 rv"><p class="disp">People</p><h2 class="h2">介護の現場を知る<br>専門家が担当します。</h2><img class="k-fig" src="img/illust_hug.svg" alt="" width="302" height="427" loading="lazy"></div>
   <div>
     <p class="lead rv" style="max-width:none">中小企業診断士など、約35名の認定ビズクリサポーターの中から、ご相談の内容に合わせて担当を決めます。介護・ヘルスケアの事業者の支援では、次のようなテーマに関わってきました。</p>
     <div class="tools k-themes" style="margin-top:48px">
@@ -494,7 +499,7 @@ b,strong{font-weight:500}
 
 <!-- 流れ -->
 <section class="sec gridbg" id="flow"><div class="wrap">
-  <div class="split" style="align-items:end"><div class="rv"><p class="disp">Flow</p><h2 class="h2" style="margin-top:26px">お申し込みから<br>相談まで</h2></div><p class="lead rv">お申し込みのあと、ビズクリ事務局から日程調整のご連絡をします。相談はオンライン会議で行います。</p></div>
+  <div class="split" style="align-items:end"><div class="rv"><p class="disp">Flow</p><h2 class="h2" style="margin-top:26px">お申し込みから<br>相談まで</h2><img class="k-fig" src="img/illust_flower.svg" alt="" width="286" height="349" loading="lazy"></div><p class="lead rv">お申し込みのあと、ビズクリ事務局から日程調整のご連絡をします。相談はオンライン会議で行います。</p></div>
   <div class="k-flow">
     <div class="rv"><span class="en">01</span><b>フォームから申し込む</b><p>ご相談したい内容を、分かる範囲でご記入ください。</p></div>
     <div class="rv d1"><span class="en">02</span><b>日程を決める</b><p>事務局からメールで、候補の日時をご案内します。</p></div>
@@ -530,6 +535,7 @@ b,strong{font-weight:500}
 <!-- 最後 -->
 <section class="blue end">
   <div class="wrap">
+    <img class="k-endfig" src="img/illust_dog_w.svg" alt="" width="415" height="360" loading="lazy">
     <h2 class="rv">来年度の計画を、<br>30分だけ外の視点で。</h2>
     <p class="lead rv">介護事業者の支援経験がある認定ビズクリサポーターが、<br>理念から計画までの整理をお手伝いします。</p>
     <div class="go">
